@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SoftwareUniversity_WebApp.Core\WebApp.Core.csproj" />
+    <ProjectReference Include="..\SoftwareUniversity_WebApp.Infrastructure\WebApp.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
