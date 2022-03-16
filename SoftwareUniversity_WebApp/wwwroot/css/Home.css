@@ -1,25 +1,129 @@
  .u-section-1 {
   background-image: linear-gradient(to right, #478ac9, #db545a);
-}
-
-.u-section-1 .u-sheet-1 {
   min-height: 800px;
 }
 
-.u-section-1 .u-text-1 {
-  font-size: 6rem;
+.u-section-1 .u-list-1 {
+  width: calc(((100% - 1140px) / 2) + 150px);
+  margin: 0 auto 0 0;
+}
+
+.u-section-1 .u-repeater-1 {
+  grid-auto-columns: 100%;
+  grid-template-columns: repeat(1, 100%);
+  min-height: 800px;
+  grid-gap: 10px;
+}
+
+.u-section-1 .u-list-item-1 {
   background-image: none;
-  margin: 256px auto 60px;
+}
+
+.u-section-1 .u-container-layout-1 {
+  padding: 10px 0;
+}
+
+.u-section-1 .u-btn-1 {
+  border-style: none;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  margin: 50px auto 0;
+  padding: 20px 33px 22px;
+}
+
+.u-section-1 .u-icon-1 {
+  width: 45px;
+  height: 45px;
+  font-size: 1.2667em;
+  vertical-align: 0px;
+}
+
+.u-section-1 .u-btn-2 {
+  border-style: none;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  margin: 13px auto 0;
+  padding: 20px 33px 22px;
+}
+
+.u-section-1 .u-icon-2 {
+  width: 45px;
+  height: 45px;
+  font-size: 1.2667em;
+  vertical-align: 0px;
+}
+
+.u-section-1 .u-btn-3 {
+  border-style: none;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  margin: 14px auto 0;
+  padding: 20px 33px 22px;
+}
+
+.u-section-1 .u-icon-3 {
+  width: 45px;
+  height: 45px;
+  font-size: 1.2667em;
+  vertical-align: 0px;
+}
+
+.u-section-1 .u-btn-4 {
+  border-style: none;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  margin: 13px auto 0;
+  padding: 20px 33px 22px;
+}
+
+.u-section-1 .u-icon-4 {
+  width: 45px;
+  height: 45px;
+  font-size: 1.2667em;
+  vertical-align: 0px;
+  margin-left: 0;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-list-1 {
+    width: calc(((100% - 940px) / 2) + 150px);
+  }
+
+  .u-section-1 .u-repeater-1 {
+    grid-template-columns: 100%;
+  }
+
+  .u-section-1 .u-btn-1 {
+    margin-top: 35px;
+  }
+
+  .u-section-1 .u-btn-2 {
+    margin-top: -72px;
+  }
+
+  .u-section-1 .u-btn-3 {
+    margin-top: -75px;
+  }
+
+  .u-section-1 .u-btn-4 {
+    margin-top: -69px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-list-1 {
+    width: calc(((100% - 720px) / 2) + 150px);
+  }
 }
 
 @media (max-width: 767px) {
-  .u-section-1 .u-text-1 {
-    font-size: 3.75rem;
+  .u-section-1 .u-list-1 {
+    width: calc(((100% - 540px) / 2) + 150px);
   }
 }
 
 @media (max-width: 575px) {
-  .u-section-1 .u-text-1 {
-    font-size: 3rem;
+  .u-section-1 .u-list-1 {
+    width: calc(((100% - 340px) / 2) + 150px);
   }
 }
