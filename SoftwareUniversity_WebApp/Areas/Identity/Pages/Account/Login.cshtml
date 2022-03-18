@@ -5,42 +5,27 @@
     ViewData["Title"] = "Log in";
 }
 
+<link rel="stylesheet" href="/css/nicepageLogin.css" media="screen" asp-append-version="true" >
+<link rel="stylesheet" href="/css/Login.css" media="screen" asp-append-version="true">
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Login</title>
-    <link rel="stylesheet" href="/css/nicepageLogin.css" media="screen" asp-append-version="true" >
-    <link rel="stylesheet" href="/css/Login.css" media="screen" asp-append-version="true">
-    <meta name="generator" content="Nicepage 4.6.9, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
-    
-    
-    <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Home">
-    <meta property="og:type" content="website">
-    <link rel="canonical" href="/">
-  </head>
-  <body class="u-body u-xl-mode">
-    <section class="skrollable skrollable-between u-align-center u-clearfix u-gradient u-section-1" id="sec-7c7a">
-        <div class="u-align-left u-clearfix u-sheet u-valign-middle u-sheet-1">
-            <h1 class="u-align-center">@ViewData["Title"]</h1>
-            <div class="u-container-style u-group u-palette-1-base u-group-1">
-                <div class="u-container-layout u-valign-middle u-container-layout-1">
-                    <div class="u-form u-form-1">
-                        <form action="https://nicepage.com/editor/Forms/Process" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form" style="padding: 10px;">
+<section class="u-align-center u-clearfix u-gradient u-section-1" id="sec-7c7a">
+    <div class="u-align-left u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <div class="u-container-style u-group  u-group-1">
+            <div class="u-container-layout u-container-layout-1">
+                <h1>@ViewData["Title"]</h1>
+                <div class="u-expanded-width u-form u-form-1">
+                    <div class="row">
+                        <form method="POST" id="loginForm" asp-route-returnUrl="@Model.ReturnUrl">
+                            <h2>Log in to account.</h2>
+                            <hr/>
                             <input type="hidden" id="siteId" name="siteId" value="1601088">
                             <input type="hidden" id="pageId" name="pageId" value="1601098">
-                            <div class="u-form-group u-form-name">
+                            <div class="form-floating">
                                 <label asp-for="Input.Email" class="form-label"></label>
                                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"/>
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
-                            <div class="u-form-email u-form-group">
+                            <div class="form-floating">
                                 <label asp-for="Input.Password" class="form-label"></label>
                                 <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true"/>
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>
@@ -61,9 +46,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    
-  </body>
+    </div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

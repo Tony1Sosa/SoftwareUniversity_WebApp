@@ -115,7 +115,7 @@ namespace SoftwareUniversity_WebApp.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    return RedirectToAction("home", "Home");
                 }
                 if (result.RequiresTwoFactor)
                 {

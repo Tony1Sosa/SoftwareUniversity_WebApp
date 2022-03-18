@@ -4,6 +4,9 @@ using WebApp.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//kostadin.d@abv.bg
+//Kosio11062004!
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
