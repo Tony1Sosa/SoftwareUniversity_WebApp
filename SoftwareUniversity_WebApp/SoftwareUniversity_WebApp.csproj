@@ -24,4 +24,8 @@
     <ProjectReference Include="..\SoftwareUniversity_WebApp.Infrastructure\WebApp.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Player\" />
+  </ItemGroup>
+
 </Project>
