@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareUniversity_WebApp", "SoftwareUniversity_WebApp\SoftwareUniversity_WebApp.csproj", "{39E79043-ECCF-480E-8CD0-10055ECCF6BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftwareUniversity_WebApp", "SoftwareUniversity_WebApp\SoftwareUniversity_WebApp.csproj", "{39E79043-ECCF-480E-8CD0-10055ECCF6BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Core", "SoftwareUniversity_WebApp.Core\WebApp.Core.csproj", "{13EC5B0A-A442-4D31-9871-9306BEBF7011}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Core", "SoftwareUniversity_WebApp.Core\WebApp.Core.csproj", "{13EC5B0A-A442-4D31-9871-9306BEBF7011}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp.Infrastructure", "SoftwareUniversity_WebApp.Infrastructure\WebApp.Infrastructure.csproj", "{35ECA4C2-0565-4499-9754-295BC77C1ECC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Infrastructure", "SoftwareUniversity_WebApp.Infrastructure\WebApp.Infrastructure.csproj", "{35ECA4C2-0565-4499-9754-295BC77C1ECC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

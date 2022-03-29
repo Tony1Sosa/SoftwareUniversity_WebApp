@@ -1,0 +1,53 @@
+﻿@using WebApp.Infrastructure.Data
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+<link rel="stylesheet" href="/css/Trainig/nicepage.css" media="screen" asp-append-version="true">
+<link rel="stylesheet" href="/css/Trainig/AddTraining.css" media="screen" asp-append-version="true">
+
+<section class="u-clearfix u-section-1" id="sec-9bb9">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-align-left u-container-style u-expanded-width u-group u-palette-1-dark-1 u-shape-rectangle u-group-1">
+          <div class="u-container-layout u-valign-middle u-container-layout-1">
+            <div class="u-form u-form-1">
+              <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form" style="padding: 10px;">
+                <input type="hidden" id="siteId" name="siteId" value="1601088">
+                <input type="hidden" id="pageId" name="pageId" value="1601098">
+                <div class="u-form-group u-form-select u-form-group-1">
+                  <label for="select-f499" class="u-label">Team</label>
+                  <div class="u-form-select-wrapper">
+                    <select id="select-f499" name="select" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                      <option value="Item 1">Item 1</option>
+                      <option value="Item 2">Item 2</option>
+                      <option value="Item 3">Item 3</option>
+                    </select>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                  </div>
+                </div>
+                <div class="u-form-group u-form-select u-form-group-2">
+                  <label for="select-dc4c" class="u-label">Program</label>
+                  <div class="u-form-select-wrapper">
+                    <select id="select-dc4c" name="select-1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                      <option value="Item 1">Physical</option>
+                      <option value="Item 2">Isometric</option>
+                      <option value="Item 3">Conditional</option>
+                    </select>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                  </div>
+                </div>
+                <div class="u-form-group u-form-textarea u-form-group-3">
+                  <label for="textarea-7f1d" class="u-label">Description</label>
+                  <textarea rows="4" cols="50" id="textarea-7f1d" name="textarea" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required=""></textarea>
+                </div>
+                <div class="u-align-center u-form-group u-form-submit">
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Add</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+

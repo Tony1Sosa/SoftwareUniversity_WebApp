@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebApp.Infrastructure.Data.Models;
 
 namespace WebApp.Infrastructure.Data
 {
@@ -9,5 +10,10 @@ namespace WebApp.Infrastructure.Data
             : base(options)
         {
         }
+
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamPlayer> TeamPlayers { get; set; }
+        public DbSet<Training> Trainings { get; set; }
     }
 }

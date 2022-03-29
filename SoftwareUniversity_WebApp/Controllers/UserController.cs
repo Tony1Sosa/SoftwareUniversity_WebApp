@@ -2,9 +2,9 @@
 
 namespace SoftwareUniversity_WebApp.Controllers
 {
-    public class TrainController : Controller
+    public class UserController : Controller
     {
-        public IActionResult Add()
+        public IActionResult All()
         {
             return View();
         }

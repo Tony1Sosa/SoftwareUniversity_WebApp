@@ -1,16 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SoftwareUniversity_WebApp.Models;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using WebApp.Core.Interfaces;
+using WebApp.Infrastructure.Data;
+using WebApp.Infrastructure.Data.Models;
 
 namespace SoftwareUniversity_WebApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ITeamService _teamService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ITeamService teamService)
         {
             _logger = logger;
+            _teamService = teamService;
         }
 
         public IActionResult Index()
@@ -20,7 +26,8 @@ namespace SoftwareUniversity_WebApp.Controllers
 
         public IActionResult Home()
         {
-            return View();
+            var teams = _teamService.GetTeams();
+            return View(teams);
         }
 
         public IActionResult Privacy()
