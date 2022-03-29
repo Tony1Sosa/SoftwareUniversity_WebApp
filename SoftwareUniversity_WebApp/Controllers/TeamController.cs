@@ -7,14 +7,17 @@ namespace SoftwareUniversity_WebApp.Controllers
     public class TeamController : Controller
     {
         private readonly ITeamService _teamService;
+        private readonly IPlayerService _playerService;
 
-        public TeamController(ITeamService teamService)
+        public TeamController(ITeamService teamService, IPlayerService playerService)
         {
             _teamService = teamService;
+            _playerService = playerService;
         }
         public IActionResult Add()
         {
-            return View();
+            var players = _playerService.GetPlayers();
+            return View(players);
         }
 
         [HttpPost]

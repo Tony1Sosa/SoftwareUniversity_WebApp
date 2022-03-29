@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Add";
 }
-@model 
+@model IEnumerable<WebApp.Core.Models.PlayerViewModel>
 
 <link rel="stylesheet" href="/css/Team/nicepage.css" media="screen" asp-append-version="true" >
 <link rel="stylesheet" href="/css/Team/AddTeam.css" media="screen" asp-append-version="true">
@@ -32,15 +32,24 @@
                     <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form-1" style="padding: 10px;">
                       <input type="hidden" id="siteId" name="siteId" value="1601088">
                       <input type="hidden" id="pageId" name="pageId" value="1601098">
-                      @foreach()
-                      <div class="u-form-checkbox u-form-group u-form-group-6">
-                        <input type="checkbox" id="checkbox-e4f4" name="checkbox" value="On">
-                        <label for="checkbox-e4f4" class="u-label">Checkbox</label>
-                      </div>
-                      <div class="u-form-checkbox u-form-group u-form-group-7">
-                        <input type="checkbox" id="checkbox-905e" name="checkbox-1" value="On">
-                        <label for="checkbox-905e" class="u-label">Checkbox</label>
-                      </div>
+
+                      @foreach (var item in Model)
+                      {
+                          //see how to take collection from checkboxes
+
+                          var checkBoxId = "chk" + @item.Name;
+                          var tdId = "td" + @item.Name;
+                          <table width="100%">
+                              <tr >
+                                  <td width="10px">
+                                      <input type="checkbox" id="checkBoxId" class="chkclass" value="@item.Name"/>
+                                  </td>
+                                  <td id="@tdId" width="40px">
+                                      @item.Name
+                                  </td>
+                              </tr>
+                          </table>
+                      }
                     </form>
                   </div>
                 </div>

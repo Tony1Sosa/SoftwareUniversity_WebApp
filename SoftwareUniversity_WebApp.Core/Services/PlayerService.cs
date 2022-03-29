@@ -42,7 +42,7 @@ namespace WebApp.Core.Services
             return (passed,error);
         }
 
-        public IEnumerable<TeamViewModel> GetPlayers()
+        public IEnumerable<PlayerViewModel> GetPlayers()
         {
             var players = repo.All<Player>()
                 .Select(p => new PlayerViewModel()
