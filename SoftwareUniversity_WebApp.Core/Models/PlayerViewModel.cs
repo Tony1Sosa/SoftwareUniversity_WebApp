@@ -11,6 +11,7 @@ namespace WebApp.Core.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public DateTime BD { get; set; }
+        public string Foot { get; set; }
         public int Number { get; set; }
         public string Possition { get; set; }
     }

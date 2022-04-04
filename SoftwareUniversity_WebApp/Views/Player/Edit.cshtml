@@ -1,0 +1,72 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@using WebApp.Core.Interfaces
+
+@{
+    ViewData["Title"] = "Team Info";
+}
+@model IQueryable<WebApp.Core.Models.PlayerViewModel>
+
+<link rel="stylesheet" href="/css/Team/nicepage.css" media="screen" asp-append-version="true" >
+<link rel="stylesheet" href="/css/Player/EditPlayer.css" media="screen" asp-append-version="true">
+
+<body class="u-body u-xl-mode">
+    <section class="u-clearfix u-section-1" id="sec-9bb9">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <div class="u-container-style u-expanded-width u-group u-shape-rectangle u-group-1">
+                <div class="u-container-layout u-container-layout-1">
+                    <div class="u-form u-form-1">
+                        <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form" style="padding: 10px;">
+                            <div class="u-container-style u-group u-palette-1-base u-radius-10 u-shape-round u-group-2">
+                                <div class="u-container-layout u-container-layout-2">
+                                    <div class="u-expanded-width u-form u-form-2">
+                                        <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form-1" style="padding: 10px;">
+                                            @foreach (var player in Model)
+                                            {
+                                                <div class="u-form-email u-form-group">
+                                                    <label for="email-8673" class="u-label">Name: </label>
+                                                    <input type="text" placeholder="@player.Name" name="Name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" spellcheck="false">
+                                                </div>
+                                                <div class="u-form-email u-form-group">
+                                                    <label for="email-8673" class="u-label">BD: @player.BD.ToString("yy-MM-dd")</label>
+                                                    <input type="date" placeholder="MM/DD/YYYY" id="date-e1ab" name="BD" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                                                </div>
+                                                <div class="u-form-email u-form-group">
+                                                    <label for="email-8673" class="u-label">Foot: @player.Foot</label>
+                                                    <select id="select-deef" name="Foot" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                                                        <option value="Right">Right</option>
+                                                        <option value="Left">Left</option>
+                                                    </select>
+                                                </div>
+                                                <div class="u-form-email u-form-group">
+                                                    <label for="email-8673" class="u-label">Number: </label>
+                                                    <input type="number" placeholder="@player.Number" id="email-8673" name="Number" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" spellcheck="false">
+                                                </div>
+                                                <div class="u-form-email u-form-group">
+                                                    <label for="email-8673" class="u-label">Position: @player.Possition</label>
+                                                    <select id="select-deef" name="Possition" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                                                        <option value="Goalkeeper">Goalkeeper</option>
+                                                        <option value="Defender">Defender</option>
+                                                        <option value="Midfielder">Midfielder</option>
+                                                        <option value="Forward">Forward</option>
+                                                    </select>
+                                                </div>
+                                            }
+                                            <div class="u-align-center u-form-group u-form-submit">
+                                                <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Edit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  </body>

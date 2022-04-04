@@ -2,6 +2,7 @@
 using SoftwareUniversity_WebApp.Models;
 using WebApp.Core.Interfaces;
 using WebApp.Core.Models;
+using WebApp.Infrastructure.Data.Models;
 
 namespace SoftwareUniversity_WebApp.Controllers
 {
@@ -29,15 +30,11 @@ namespace SoftwareUniversity_WebApp.Controllers
                 {
                     return RedirectToAction("Home", "Home");
                 }
-                else
-                {
-                    return RedirectToAction("Error", "Home");
-                }
-            }
-            else
-            {
+
                 return RedirectToAction("Error", "Home");
             }
+
+            return RedirectToAction("Error", "Home");
         }
 
         public IActionResult ViewInfo(string id)
@@ -45,6 +42,48 @@ namespace SoftwareUniversity_WebApp.Controllers
             var player = _playerService.FindPlayer(id);
 
             return View(player);
+        }
+
+        public IActionResult Edit(string id)
+        {
+            var player = _playerService.FindPlayer(id);
+
+            return View(player);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(PlayerViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                if (_playerService.EditPlayer(model))
+                {
+                    return RedirectToAction("Home", "Home");
+                }
+
+                return RedirectToAction("Error", "Home");
+            }
+
+            return RedirectToAction("Error", "Home");
+        }
+
+        public IActionResult Remove(string id)
+        {
+            var player = _playerService.FindPlayer(id);
+
+            return View(player);
+        }
+
+        [HttpPost]
+        public IActionResult Remove(Player model)
+        {
+            if (_playerService.RemovePlayer(model.Id))
+            {
+                return RedirectToAction("Home", "Home");
+            }
+
+            return RedirectToAction("Error", "Home");
         }
     }
 }

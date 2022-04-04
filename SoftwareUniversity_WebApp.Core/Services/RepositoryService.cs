@@ -20,6 +20,11 @@ namespace WebApp.Core.Services
             DbSet<T>().Add(entity);
         }
 
+        public void Remove<T>(T entity) where T : class
+        {
+            DbSet<T>().Remove(entity);
+        }
+
         public IQueryable<T> All<T>() where T : class
         {
             return DbSet<T>().AsQueryable();
@@ -31,6 +36,7 @@ namespace WebApp.Core.Services
                 .Select(p => new PlayerViewModel()
                 {
                     Id = p.Id,
+                    Foot = p.Foot,
                     Name = string.Concat(p.FirstName, p.LastName),
                     BD = p.BirthDate,
                     Number = p.Number,

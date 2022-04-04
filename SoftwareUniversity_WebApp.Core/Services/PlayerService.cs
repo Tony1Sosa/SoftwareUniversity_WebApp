@@ -49,6 +49,7 @@ namespace WebApp.Core.Services
                 .Select(p => new PlayerViewModel()
                 {
                     Id = p.Id,
+                    Foot = p.Foot,
                     Name = string.Concat(p.FirstName, p.LastName),
                     BD = p.BirthDate,
                     Number = p.Number,
@@ -56,6 +57,58 @@ namespace WebApp.Core.Services
                 });
 
             return player;
+        }
+
+        public bool EditPlayer(PlayerViewModel model)
+        {
+            string[] name = model.Name.Split(" ", StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+            string firstName = name[0];
+            string secondName = name[1];
+
+            var player = repo.All<Player>()
+                .FirstOrDefault(p => p.Id.Equals(model.Id));
+
+            player.FirstName = firstName;
+            player.LastName = secondName;
+            player.BirthDate = model.BD;
+            player.Foot = model.Foot;
+            player.Number = model.Number;
+            player.Position = model.Possition;
+
+            try
+            {
+                repo.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
+
+        public bool RemovePlayer(string modelId)
+        {
+            var player = repo.All<Player>().Where(p => p.Id == modelId);
+
+            Player foundPlayer = null;
+
+            foreach (Player player1 in player)
+            {
+                foundPlayer = player1;
+            }
+
+            try
+            {
+                repo.Remove(foundPlayer);
+                repo.SaveChanges();
+                return true;
+            }
+            catch (Exception )
+            {
+                return false;
+            }
         }
 
         public IEnumerable<PlayerViewModel> GetPlayers()

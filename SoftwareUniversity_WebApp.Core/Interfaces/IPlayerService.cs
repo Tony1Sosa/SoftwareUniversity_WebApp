@@ -9,5 +9,8 @@ namespace WebApp.Core.Interfaces
         public IEnumerable<PlayerViewModel> GetPlayers();
 
         public IQueryable<PlayerViewModel> FindPlayer(string modelId);
+
+        public bool EditPlayer(PlayerViewModel model);
+        public bool RemovePlayer(string modelId);
     }
 }
