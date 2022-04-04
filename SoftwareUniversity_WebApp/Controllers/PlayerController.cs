@@ -7,7 +7,7 @@ namespace SoftwareUniversity_WebApp.Controllers
 {
     public class PlayerController : Controller
     {
-        private IPlayerService _playerService;
+        private readonly IPlayerService _playerService;
 
         public PlayerController(IPlayerService playerService)
         {
@@ -38,6 +38,13 @@ namespace SoftwareUniversity_WebApp.Controllers
             {
                 return RedirectToAction("Error", "Home");
             }
+        }
+
+        public IActionResult ViewInfo(string id)
+        {
+            var player = _playerService.FindPlayer(id);
+
+            return View(player);
         }
     }
 }

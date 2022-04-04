@@ -11,12 +11,12 @@ namespace SoftwareUniversity_WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ITeamService _teamService;
+        private readonly IRepository _repository;
 
-        public HomeController(ILogger<HomeController> logger, ITeamService teamService)
+        public HomeController(ILogger<HomeController> logger, IRepository repository)
         {
             _logger = logger;
-            _teamService = teamService;
+            _repository = repository;
         }
 
         public IActionResult Index()
@@ -26,8 +26,8 @@ namespace SoftwareUniversity_WebApp.Controllers
 
         public IActionResult Home()
         {
-            var teams = _teamService.GetTeams();
-            return View(teams);
+            var homeModel = _repository.GetEntitiesFromDb();
+            return View(homeModel);
         }
 
         public IActionResult Privacy()

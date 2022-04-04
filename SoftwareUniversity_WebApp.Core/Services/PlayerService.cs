@@ -28,7 +28,7 @@ namespace WebApp.Core.Services
 
             Player newPlayer = new Player()
             {
-                FirstName = model.name,
+                FirstName = model.name + "_",
                 LastName = model.lastName,
                 Number = model.number,
                 Position = model.position,
@@ -42,15 +42,32 @@ namespace WebApp.Core.Services
             return (passed,error);
         }
 
+        public IQueryable<PlayerViewModel> FindPlayer(string modelId)
+        {
+            var player = repo.All<Player>()
+                .Where(p => p.Id == modelId)
+                .Select(p => new PlayerViewModel()
+                {
+                    Id = p.Id,
+                    Name = string.Concat(p.FirstName, p.LastName),
+                    BD = p.BirthDate,
+                    Number = p.Number,
+                    Possition = p.Position
+                });
+
+            return player;
+        }
+
         public IEnumerable<PlayerViewModel> GetPlayers()
         {
             var players = repo.All<Player>()
                 .Select(p => new PlayerViewModel()
                 {
-                  Name  = string.Concat(p.FirstName, p.LastName),
-                  BD = p.BirthDate,
-                  Number = p.Number,
-                  Possition = p.Position
+                    Id = p.Id, 
+                    Name  = string.Concat(p.FirstName, p.LastName),
+                    BD = p.BirthDate,
+                    Number = p.Number,
+                    Possition = p.Position
 
                 }).ToList();
 

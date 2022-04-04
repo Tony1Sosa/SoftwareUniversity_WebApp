@@ -2,7 +2,8 @@
 @{
     ViewData["Title"] = "Home";
 }
-@model IEnumerable<WebApp.Core.Models.TeamViewModel>
+@using WebApp.Core.Models
+@model WebApp.Core.Models.HomeViewModel
 
 
 <head>
@@ -47,12 +48,21 @@
                 <div class="u-layout-col">
                   <div class="u-align-left u-container-style u-layout-cell u-palette-1-dark-1 u-shape-rectangle u-size-60 u-layout-cell-1">
                       <div class="u-border-20 u-border-grey-75 u-container-layout u-container-layout-2">
-                          @foreach (var item in Model)
+                          @if (Model.TeamViewModels.Count() == 0)
                           {
                               <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-1">
-                                  <label for="date-e1ab" class="u-label">@item.Name.ToString()</label>
-                                  <label for="date-e1ab" class="u-label">@item.AgeSection.ToString()</label>
+                                  <center><label for="date-e1ab" class="u-label">There Are No Teams Yet!</label></center>
                               </div>
+                          }
+                          else
+                          {
+                              @foreach (var teamModel in Model.TeamViewModels)
+                              {
+                                  <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-1">
+                                      <label for="date-e1ab" class="u-label">@teamModel.Name</label>
+                                      <label for="date-e1ab" class="u-label">@teamModel.AgeSection</label>
+                                  </div>   
+                              }   
                           }
                       </div>
                   </div>
@@ -61,16 +71,44 @@
               <div class="u-size-30">
                 <div class="u-layout-col">
                   <div class="u-container-style u-layout-cell u-palette-1-dark-1 u-shape-rectangle u-size-30 u-layout-cell-2">
-                    <div class="u-border-20 u-border-grey-75 u-container-layout u-container-layout-3">
-                      <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3"></div>
-                      <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-4"></div>
-                    </div>
+                      <div class="u-border-20 u-border-grey-75 u-container-layout u-container-layout-3">
+                          @if (Model.PlayerViewModels.Count() == 0)
+                          {
+                              <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
+                                  <center>There Are No Players Yet!</center>
+                              </div>
+                          }
+                          else
+                          {
+                              @foreach (var playerModel in Model.PlayerViewModels)
+                              {
+                                  <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
+                                      <center><a asp-controller="Player" asp-action="ViewInfo" asp-route-id="@playerModel.Id">@playerModel.Name</a></center>
+
+                                      @*@Html.ActionLink(playerModel.Name, "ViewInfo", "Player", new {playerModel})*@
+                                  </div>
+                              }   
+                          }
+                      </div>
                   </div>
                   <div class="u-container-style u-layout-cell u-palette-1-dark-1 u-shape-rectangle u-size-30 u-layout-cell-3">
-                    <div class="u-border-20 u-border-grey-75 u-container-layout u-container-layout-4">
-                      <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-5"></div>
-                      <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-6"></div>
-                    </div>
+                      <div class="u-border-20 u-border-grey-75 u-container-layout u-container-layout-4">
+                          @if (Model.TrainingViewModels.Count() == 0)
+                          {
+                              <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-5">
+                                  <center>There Are No Trainigs Yet!</center>
+                              </div>
+                          }
+                          else
+                          {
+                              @foreach (var trainigModel in Model.TrainingViewModels)
+                              {
+                                  <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-5">
+                                      <center>@trainigModel.Type || @trainigModel.Description</center>
+                                  </div>
+                              }   
+                          }
+                      </div>
                   </div>
                 </div>
               </div>

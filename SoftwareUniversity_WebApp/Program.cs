@@ -21,6 +21,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IRepository, RepositoryService>();
 builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<ITrainingService, TrainingService>();
 
 var app = builder.Build();
 
@@ -47,6 +48,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "displayPlayerInfo",
+    pattern: "{controller=Player}/{action=ViewInfo}/{id?}");
 app.MapRazorPages();
 
 app.Run();

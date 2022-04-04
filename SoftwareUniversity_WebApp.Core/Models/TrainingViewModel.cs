@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace WebApp.Core.Models
 {
-    public class PlayerViewModel
+    public class TrainingViewModel
     {
         public string Id { get; set; }
-        public string Name { get; set; }
-        public DateTime BD { get; set; }
-        public int Number { get; set; }
-        public string Possition { get; set; }
+        public string Type { get; set; }
+        public string Description { get; set; }
     }
 }

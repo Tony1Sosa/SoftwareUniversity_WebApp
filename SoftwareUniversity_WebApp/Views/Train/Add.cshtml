@@ -4,6 +4,8 @@
     ViewData["Title"] = "Add";
 }
 
+@model IEnumerable<WebApp.Core.Models.TeamViewModel>
+
 <link rel="stylesheet" href="/css/Trainig/nicepage.css" media="screen" asp-append-version="true">
 <link rel="stylesheet" href="/css/Trainig/AddTraining.css" media="screen" asp-append-version="true">
 
@@ -18,11 +20,12 @@
                 <div class="u-form-group u-form-select u-form-group-1">
                   <label for="select-f499" class="u-label">Team</label>
                   <div class="u-form-select-wrapper">
-                    <select id="select-f499" name="select" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
-                      <option value="Item 1">Item 1</option>
-                      <option value="Item 2">Item 2</option>
-                      <option value="Item 3">Item 3</option>
-                    </select>
+                      <select id="select-f499" name="select" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                          @foreach (var teamModel in Model)
+                          {
+                              <option value="Item 1">@teamModel.Name</option>
+                          }
+                      </select>
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
                   </div>
                 </div>

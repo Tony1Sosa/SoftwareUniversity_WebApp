@@ -42,5 +42,10 @@ namespace SoftwareUniversity_WebApp.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
+
+        public IActionResult ViewInfo()
+        {
+            return View();
+        }
     }
 }
