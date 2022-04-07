@@ -224,6 +224,37 @@ namespace WebApp.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Event", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("TeamId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("Events");
+                });
+
             modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Player", b =>
                 {
                     b.Property<string>("Id")
@@ -254,6 +285,7 @@ namespace WebApp.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TeamId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -277,43 +309,15 @@ namespace WebApp.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("TrainingId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TrainingId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("WebApp.Infrastructure.Data.Models.TeamPlayer", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PlayerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("TeamId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlayerId");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("TeamPlayers");
                 });
 
             modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Training", b =>
@@ -326,12 +330,23 @@ namespace WebApp.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("Program")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("TeamId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
 
                     b.ToTable("Trainings");
                 });
@@ -387,54 +402,48 @@ namespace WebApp.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Player", b =>
+            modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Event", b =>
                 {
-                    b.HasOne("WebApp.Infrastructure.Data.Models.Team", null)
-                        .WithMany("Players")
-                        .HasForeignKey("TeamId");
-                });
-
-            modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Team", b =>
-                {
-                    b.HasOne("WebApp.Infrastructure.Data.Models.Training", "Training")
-                        .WithMany()
-                        .HasForeignKey("TrainingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Training");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WebApp.Infrastructure.Data.Models.TeamPlayer", b =>
-                {
-                    b.HasOne("WebApp.Infrastructure.Data.Models.Player", "Player")
-                        .WithMany()
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WebApp.Infrastructure.Data.Models.Team", "Team")
                         .WithMany()
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Player");
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Player", b =>
+                {
+                    b.HasOne("WebApp.Infrastructure.Data.Models.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Team");
                 });
 
             modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Team", b =>
                 {
-                    b.Navigation("Players");
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Training", b =>
+                {
+                    b.HasOne("WebApp.Infrastructure.Data.Models.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Team");
                 });
 #pragma warning restore 612, 618
         }

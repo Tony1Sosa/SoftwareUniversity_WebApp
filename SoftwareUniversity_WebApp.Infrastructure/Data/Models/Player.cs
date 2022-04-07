@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApp.Infrastructure.Data.Models
 {
@@ -25,6 +27,13 @@ namespace WebApp.Infrastructure.Data.Models
 
         [Required]
         public DateTime BirthDate { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(Team))]
+        public string TeamId { get; set; }
+
+        [Required]
+        public Team Team { get; set; }
 
     }
 }

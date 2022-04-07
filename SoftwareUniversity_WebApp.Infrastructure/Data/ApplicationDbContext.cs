@@ -13,7 +13,7 @@ namespace WebApp.Infrastructure.Data
 
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<TeamPlayer> TeamPlayers { get; set; }
         public DbSet<Training> Trainings { get; set; }
+        public DbSet<Event> Events { get; set; }
     }
 }

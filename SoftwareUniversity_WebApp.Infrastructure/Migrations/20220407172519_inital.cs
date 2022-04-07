@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApp.Infrastructure.Migrations
 {
-    public partial class initalMigration : Migration
+    public partial class inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,19 +46,6 @@ namespace WebApp.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Trainings",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Trainings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -174,8 +161,7 @@ namespace WebApp.Infrastructure.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    AgeSection = table.Column<int>(type: "int", maxLength: 5, nullable: false),
-                    TrainingId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    AgeSection = table.Column<int>(type: "int", maxLength: 5, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -186,10 +172,25 @@ namespace WebApp.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    TeamId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teams_Trainings_TrainingId",
-                        column: x => x.TrainingId,
-                        principalTable: "Trainings",
+                        name: "FK_Events_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -205,7 +206,7 @@ namespace WebApp.Infrastructure.Migrations
                     Position = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Foot = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TeamId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    TeamId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -214,28 +215,25 @@ namespace WebApp.Infrastructure.Migrations
                         name: "FK_Players_Teams_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Teams",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TeamPlayers",
+                name: "Trainings",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TeamId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PlayerId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Type = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Program = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    TeamId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TeamPlayers", x => x.Id);
+                    table.PrimaryKey("PK_Trainings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TeamPlayers_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TeamPlayers_Teams_TeamId",
+                        name: "FK_Trainings_Teams_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Teams",
                         principalColumn: "Id",
@@ -282,29 +280,24 @@ namespace WebApp.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Events_TeamId",
+                table: "Events",
+                column: "TeamId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Players_TeamId",
                 table: "Players",
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeamPlayers_PlayerId",
-                table: "TeamPlayers",
-                column: "PlayerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TeamPlayers_TeamId",
-                table: "TeamPlayers",
-                column: "TeamId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Teams_TrainingId",
-                table: "Teams",
-                column: "TrainingId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Teams_UserId",
                 table: "Teams",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trainings_TeamId",
+                table: "Trainings",
+                column: "TeamId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -325,22 +318,22 @@ namespace WebApp.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "TeamPlayers");
-
-            migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "Players");
+
+            migrationBuilder.DropTable(
+                name: "Trainings");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Teams");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Trainings");
         }
     }
 }

@@ -1,9 +1,15 @@
 ﻿@using WebApp.Core.Interfaces
+@using Microsoft.AspNetCore.Identity
 
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Add Team";
 }
-@model IEnumerable<WebApp.Core.Models.PlayerViewModel>
+
+@inject UserManager<IdentityUser> userManager
+@{
+    var user = userManager.GetUserAsync(User);
+    var userId = user.Result.Id;
+}
 
 <link rel="stylesheet" href="/css/Team/nicepage.css" media="screen" asp-append-version="true" >
 <link rel="stylesheet" href="/css/Team/AddTeam.css" media="screen" asp-append-version="true">
@@ -14,53 +20,24 @@
         <div class="u-container-style u-expanded-width u-group u-shape-rectangle u-group-1">
           <div class="u-container-layout u-container-layout-1">
             <div class="u-form u-form-1">
-              <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form" style="padding: 10px;">
-                <input type="hidden" id="siteId" name="siteId" value="1601088">
-                <input type="hidden" id="pageId" name="pageId" value="1601098">
-                <div class="u-form-group u-form-name">
-                  <label for="name-8673" class="u-label">Name</label>
-                  <input type="text" placeholder="Enter your Name" id="name-8673" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
-                </div>
-                <div class="u-form-email u-form-group">
-                  <label for="email-8673" class="u-label">AgeSection</label>
-                  <input type="number" placeholder="Enter Age Section" id="email-8673" name="AgeSection" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" spellcheck="false">
-              </div>
-
-              <div class="u-container-style u-group u-palette-1-base u-radius-10 u-shape-round u-group-2">
-                <div class="u-container-layout u-container-layout-2">
-                  <div class="u-expanded-width u-form u-form-2">
-                    <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form-1" style="padding: 10px;">
-                      <input type="hidden" id="siteId" name="siteId" value="1601088">
-                      <input type="hidden" id="pageId" name="pageId" value="1601098">
-
-                      @foreach (var item in Model)
-                      {
-                          //see how to take collection from checkboxes
-
-                          var checkBoxId = "chk" + @item.Name;
-                          var tdId = "td" + @item.Name;
-                          <table width="100%">
-                              <tr >
-                                  <td width="10px">
-                                      <input type="checkbox" id="checkBoxId" class="chkclass" value="@item.Name"/>
-                                  </td>
-                                  <td id="@tdId" width="40px">
-                                      @item.Name
-                                  </td>
-                              </tr>
-                          </table>
-                      }
-                    </form>
-                  </div>
-                </div>
-              </div>
-              </form>
-              <div class="u-align-center u-form-group u-form-submit">
-                <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-            </div>
+                   <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form" style="padding: 10px;">
+                    
+                    <div class="u-form-group u-form-name">
+                      <label for="name-8673" class="u-label">Name</label>
+                      <input type="text" placeholder="Enter your Name" id="name-8673" name="Name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                    </div>
+                       <div class="u-form-email u-form-group">
+                           <label for="email-8673" class="u-label">AgeSection</label>
+                           <input type="number" placeholder="Enter Age Section" id="email-8673" name="AgeSection" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" spellcheck="false">
+                       </div>
+                       <input name="UserId" type="hidden" value="@userId" />
+                       <div class="u-align-center u-form-group u-form-submit">
+                           <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Add</button>
+                       </div>
+                   </form>
             </div>
           </div>
         </div>
       </div>
     </section>
-  </body>
+</body>

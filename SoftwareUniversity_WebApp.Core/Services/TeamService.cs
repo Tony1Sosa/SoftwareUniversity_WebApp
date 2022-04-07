@@ -29,7 +29,7 @@ namespace WebApp.Core.Services
             {
                 Name = model.Name,
                 AgeSection = model.AgeSection,
-                Players = model.Players
+                UserId = model.UserId
             };
 
             _repository.Add(newTeam);
@@ -38,13 +38,15 @@ namespace WebApp.Core.Services
             return (passed, error);
         }
 
-        public IEnumerable<TeamViewModel> GetTeams()
+        public IEnumerable<TeamViewModel> GetTeams(string userId)
         {
             var teams = _repository.All<Team>()
+                .Where(x=> x.UserId == userId)
                 .Select(t => new TeamViewModel()
                 {
                     Name = t.Name,
-                    AgeSection = t.AgeSection
+                    AgeSection = t.AgeSection,
+                    Id = t.Id
                 }).ToList();
 
             return teams;

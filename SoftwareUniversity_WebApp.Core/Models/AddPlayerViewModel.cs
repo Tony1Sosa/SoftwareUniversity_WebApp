@@ -24,5 +24,11 @@ namespace WebApp.Core.Models
 
         [Required]
         public string birthdayDate { get; set; }
+
+        [Required]
+        public string TeamId { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
     }
 }

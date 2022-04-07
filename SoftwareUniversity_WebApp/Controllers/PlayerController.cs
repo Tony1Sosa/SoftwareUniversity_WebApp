@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
 using SoftwareUniversity_WebApp.Models;
 using WebApp.Core.Interfaces;
 using WebApp.Core.Models;
@@ -9,15 +10,19 @@ namespace SoftwareUniversity_WebApp.Controllers
     public class PlayerController : Controller
     {
         private readonly IPlayerService _playerService;
+        private readonly IRepository _repository;
 
-        public PlayerController(IPlayerService playerService)
+        public PlayerController(IPlayerService playerService, IRepository repository)
         {
             _playerService = playerService;
+            _repository = repository;
         }
 
         public IActionResult Add()
         {
-            return View();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var teams = _repository.GetEntitiesFromDb(userId);
+            return View(teams);
         }
 
         [HttpPost]
@@ -31,7 +36,7 @@ namespace SoftwareUniversity_WebApp.Controllers
                     return RedirectToAction("Home", "Home");
                 }
 
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", "Home", error);
             }
 
             return RedirectToAction("Error", "Home");

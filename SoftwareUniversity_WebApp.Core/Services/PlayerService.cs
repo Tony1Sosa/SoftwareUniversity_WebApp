@@ -24,7 +24,7 @@ namespace WebApp.Core.Services
             bool passed = true;
             string error = string.Empty;
 
-            var players = repo.All<Player>();
+
 
             Player newPlayer = new Player()
             {
@@ -33,6 +33,7 @@ namespace WebApp.Core.Services
                 Number = model.number,
                 Position = model.position,
                 Foot = model.foot,
+                TeamId = model.TeamId,
                 BirthDate = DateTime.ParseExact(model.birthdayDate, "yyyy-MM-dd", CultureInfo.InvariantCulture)
             };
 
@@ -53,7 +54,8 @@ namespace WebApp.Core.Services
                     Name = string.Concat(p.FirstName, p.LastName),
                     BD = p.BirthDate,
                     Number = p.Number,
-                    Possition = p.Position
+                    Possition = p.Position,
+                    
                 });
 
             return player;
@@ -111,9 +113,10 @@ namespace WebApp.Core.Services
             }
         }
 
-        public IEnumerable<PlayerViewModel> GetPlayers()
+        public IEnumerable<PlayerViewModel> GetPlayers(string userId)
         {
             var players = repo.All<Player>()
+                .Where(p=> p.Team.UserId == userId)
                 .Select(p => new PlayerViewModel()
                 {
                     Id = p.Id, 

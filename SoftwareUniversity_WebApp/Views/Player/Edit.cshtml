@@ -1,13 +1,14 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
+@using WebApp.Core.Interfaces
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> userManager
 @{
+    var user = userManager.GetUserAsync(User);
+    var userId = user.Result.Id;
 }
 
-@using WebApp.Core.Interfaces
-
 @{
-    ViewData["Title"] = "Team Info";
+    ViewData["Title"] = "Player Info";
 }
 @model IQueryable<WebApp.Core.Models.PlayerViewModel>
 
@@ -55,6 +56,8 @@
                                                         <option value="Forward">Forward</option>
                                                     </select>
                                                 </div>
+                                                <input name="UserId" type="hidden" value="@userId" />
+
                                             }
                                             <div class="u-align-center u-form-group u-form-submit">
                                                 <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Edit</button>

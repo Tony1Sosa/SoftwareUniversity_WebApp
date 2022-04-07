@@ -1,7 +1,12 @@
 ﻿@using WebApp.Infrastructure.Data
-
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<IdentityUser> userManager
 @{
-    ViewData["Title"] = "Add";
+    var user = userManager.GetUserAsync(User);
+    var userId = user.Result.Id;
+}
+@{
+    ViewData["Title"] = "Add Train";
 }
 
 @model IEnumerable<WebApp.Core.Models.TeamViewModel>
@@ -20,30 +25,42 @@
                 <div class="u-form-group u-form-select u-form-group-1">
                   <label for="select-f499" class="u-label">Team</label>
                   <div class="u-form-select-wrapper">
-                      <select id="select-f499" name="select" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                      <select id="select-f499" name="TeamId" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                           @foreach (var teamModel in Model)
                           {
-                              <option value="Item 1">@teamModel.Name</option>
+                              <option value="@teamModel.Id">@teamModel.Name</option>
                           }
                       </select>
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
                   </div>
                 </div>
                 <div class="u-form-group u-form-select u-form-group-2">
-                  <label for="select-dc4c" class="u-label">Program</label>
-                  <div class="u-form-select-wrapper">
-                    <select id="select-dc4c" name="select-1" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
-                      <option value="Item 1">Physical</option>
-                      <option value="Item 2">Isometric</option>
-                      <option value="Item 3">Conditional</option>
-                    </select>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
-                  </div>
+                    <label for="select-dc4c" class="u-label">Program</label>
+                    <div class="u-form-select-wrapper">
+                        <select id="select-dc4c" name="Program" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                            <option value="Physical">Physical</option>
+                            <option value="Isometric">Isometric</option>
+                            <option value="Conditional">Conditional</option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                    </div>
+                </div>
+                <div class="u-form-group u-form-select u-form-group-2">
+                    <label for="select-dc4c" class="u-label">Type</label>
+                    <div class="u-form-select-wrapper">
+                        <select id="select-dc4c" name="Type" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                            <option value="Easy">Easy</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                    </div>
                 </div>
                 <div class="u-form-group u-form-textarea u-form-group-3">
-                  <label for="textarea-7f1d" class="u-label">Description</label>
-                  <textarea rows="4" cols="50" id="textarea-7f1d" name="textarea" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required=""></textarea>
+                    <label for="textarea-7f1d" class="u-label">Description</label>
+                    <textarea rows="4" cols="50" id="textarea-7f1d" name="Description" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required=""></textarea>
                 </div>
+                
                 <div class="u-align-center u-form-group u-form-submit">
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Add</button>
                 </div>

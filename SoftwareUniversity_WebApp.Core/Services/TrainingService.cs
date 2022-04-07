@@ -29,5 +29,28 @@ namespace WebApp.Core.Services
                 }).ToList();
             return training;
         }
+
+        public bool CreateTrainig(AddTrainingViewModel model)
+        {
+            try
+            {
+                Training newTraining = new Training()
+                {
+                    TeamId = model.TeamId,
+                    Program = model.Program,
+                    Description = model.Description,
+                    Type = model.Type
+                };
+
+                _repository.Add(newTraining);
+                _repository.SaveChanges();
+
+                return true;
+            }
+            catch (Exception )
+            {
+                return false;
+            }
+        }
     }
 }

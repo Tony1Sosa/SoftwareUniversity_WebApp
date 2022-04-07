@@ -16,6 +16,6 @@ namespace WebApp.Core.Interfaces
 
         IQueryable<T> All<T>() where T : class;
 
-        public HomeViewModel GetEntitiesFromDb();
+        public HomeViewModel GetEntitiesFromDb(string userId);
     }
 }

@@ -10,5 +10,6 @@ namespace WebApp.Core.Interfaces
     public interface ITrainingService
     {
         public IEnumerable<TrainingViewModel> GetTrainings();
+        public bool CreateTrainig(AddTrainingViewModel model);
     }
 }

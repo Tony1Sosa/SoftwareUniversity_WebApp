@@ -30,9 +30,10 @@ namespace WebApp.Core.Services
             return DbSet<T>().AsQueryable();
         }
 
-        public HomeViewModel GetEntitiesFromDb()
+        public HomeViewModel GetEntitiesFromDb(string userId)
         {
             var players = All<Player>()
+                .Where(p=> p.Team.UserId == userId)
                 .Select(p => new PlayerViewModel()
                 {
                     Id = p.Id,

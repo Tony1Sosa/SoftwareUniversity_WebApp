@@ -16,6 +16,6 @@ namespace WebApp.Core.Models
         [Range(4, 80, ErrorMessage = "{0} must be in range from {1} and {2} years.")]
         public int AgeSection { get; set; }
 
-        public ICollection<Player> Players { get; set; }
+        public string UserId { get; set; }
     }
 }

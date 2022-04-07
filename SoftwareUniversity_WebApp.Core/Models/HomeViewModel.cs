@@ -11,5 +11,6 @@ namespace WebApp.Core.Models
         public IEnumerable<TeamViewModel> TeamViewModels { get; set; }
         public IEnumerable<PlayerViewModel> PlayerViewModels { get; set; }
         public IEnumerable<TrainingViewModel> TrainingViewModels { get; set; }
+        public string UserId { get; set; }
     }
 }

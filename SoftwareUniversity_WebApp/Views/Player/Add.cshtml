@@ -1,6 +1,14 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+
+@model WebApp.Core.Models.HomeViewModel
+
+@inject UserManager<IdentityUser> userManager
 @{
-    ViewData["Title"] = "Create Player";
+    var user = userManager.GetUserAsync(User);
+    var userId = user.Result.Id;
+}
+@{
+    ViewData["Title"] = "Add Player";
 }
 
 <link rel="stylesheet" href="/css/Player/nicepage.css" media="screen" asp-append-version="true" >
@@ -46,11 +54,22 @@
                         </select>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
                     </div>
+                    <label for="select-deef" class="u-label">Team</label>
+                    <div class="u-form-select-wrapper">
+                        <select id="select-deef" name="TeamId" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+                            @foreach (var team in Model.TeamViewModels)
+                            {
+                                <option value="@team.Id">@team.Name</option>
+                            }
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1" class="u-caret"><path fill="currentColor" d="M4 8L0 4h8z"></path></svg>
+                    </div>
                 </div>
                 <div class="u-form-date u-form-group u-form-group-4">
-                  <label for="date-e1ab" class="u-label">Birthday</label>
-                  <input type="date" placeholder="MM/DD/YYYY" id="date-e1ab" name="birthdayDate" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                    <label for="date-e1ab" class="u-label">Birthday</label>
+                    <input type="date" placeholder="MM/DD/YYYY" id="date-e1ab" name="birthdayDate" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
                 </div>
+                <input name="UserId" type="hidden" value="@userId" />
                 <div class="u-align-center u-form-group u-form-submit">
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Add</button>
                 </div>

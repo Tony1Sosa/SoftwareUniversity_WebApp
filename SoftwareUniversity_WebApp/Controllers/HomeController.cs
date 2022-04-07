@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SoftwareUniversity_WebApp.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Core.Interfaces;
 using WebApp.Infrastructure.Data;
 using WebApp.Infrastructure.Data.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace SoftwareUniversity_WebApp.Controllers
 {
@@ -12,11 +14,13 @@ namespace SoftwareUniversity_WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IRepository _repository;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, IRepository repository)
+        public HomeController(ILogger<HomeController> logger, IRepository repository, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _repository = repository;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -26,7 +30,8 @@ namespace SoftwareUniversity_WebApp.Controllers
 
         public IActionResult Home()
         {
-            var homeModel = _repository.GetEntitiesFromDb();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var homeModel = _repository.GetEntitiesFromDb(userId);
             return View(homeModel);
         }
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using WebApp.Core.Interfaces;
 using WebApp.Core.Models;
 
@@ -7,17 +9,16 @@ namespace SoftwareUniversity_WebApp.Controllers
     public class TeamController : Controller
     {
         private readonly ITeamService _teamService;
-        private readonly IPlayerService _playerService;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public TeamController(ITeamService teamService, IPlayerService playerService)
+        public TeamController(ITeamService teamService, UserManager<IdentityUser> userManager)
         {
             _teamService = teamService;
-            _playerService = playerService;
+            _userManager = userManager;
         }
         public IActionResult Add()
         {
-            var players = _playerService.GetPlayers();
-            return View(players);
+            return View();
         }
 
         [HttpPost]
