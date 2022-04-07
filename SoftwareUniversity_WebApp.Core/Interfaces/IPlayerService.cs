@@ -6,7 +6,7 @@ namespace WebApp.Core.Interfaces
     {
         (bool Passed, string Error) CreatePlayer(AddPlayerViewModel model);
 
-        public IEnumerable<PlayerViewModel> GetPlayers(string userId);
+        public IEnumerable<PlayerViewModel> GetPlayersByTeam(string teamId);
 
         public IQueryable<PlayerViewModel> FindPlayer(string modelId);
 

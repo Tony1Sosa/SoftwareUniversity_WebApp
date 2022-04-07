@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Player Remove";
 }
-@model IQueryable<WebApp.Core.Models.PlayerViewModel>
+@model IQueryable<WebApp.Core.Models.TrainingViewModel>
 
 <link rel="stylesheet" href="/css/Team/nicepage.css" media="screen" asp-append-version="true" >
 <link rel="stylesheet" href="/css/Team/AddTeam.css" media="screen" asp-append-version="true">
@@ -19,32 +19,24 @@
                 <div class="u-container-layout u-container-layout-2">
                   <div class="u-expanded-width u-form u-form-2">
                     <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form-1" style="padding: 10px;">
-                      @foreach (var player in Model)
+                      @foreach (var training in Model)
                       {
                           <div class="u-form-email u-form-group">
                               <label for="email-8673" class="u-label">Name: </label>
-                              <label for="email-8673" class="u-label">@player.Name</label>
+                              <label for="email-8673" class="u-label">@training.Program</label>
                           </div>
                           <div class="u-form-email u-form-group">
                               <label for="email-8673" class="u-label">BD: </label>
-                              <label for="email-8673" class="u-label">@player.BD.ToString("yy-MM-dd")</label>
+                              <label for="email-8673" class="u-label">@training.Type</label>
                           </div>
                           <div class="u-form-email u-form-group">
                               <label for="email-8673" class="u-label">Foot: </label>
-                              <label for="email-8673" class="u-label">@player.Foot</label>
+                              <label for="email-8673" class="u-label">@training.Description</label>
                           </div>
-                          <div class="u-form-email u-form-group">
-                              <label for="email-8673" class="u-label">Number: </label>
-                              <label for="email-8673" class="u-label">@player.Number</label>
-                          </div>
-                          <div class="u-form-email u-form-group">
-                              <label for="email-8673" class="u-label">Position: </label>
-                              <label for="email-8673" class="u-label">@player.Possition</label>
-                          </div>
-                          <input name="Id" type="hidden" value="@player.Id" />
                           <div class="u-align-center u-form-group u-form-submit">
                               <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Remove</button>
                           </div>
+                          <input name="Id" type="hidden" value="@training.Id" />
                       }
                     </form>
                   </div>

@@ -81,7 +81,7 @@ namespace SoftwareUniversity_WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Remove(Player model)
+        public IActionResult Remove(PlayerViewModel model)
         {
             if (_playerService.RemovePlayer(model.Id))
             {

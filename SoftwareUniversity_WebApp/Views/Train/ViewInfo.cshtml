@@ -1,0 +1,52 @@
+﻿@using WebApp.Core.Interfaces
+
+@{
+    ViewData["Title"] = "Team ViewInfo";
+}
+@model IQueryable<WebApp.Core.Models.TrainingViewModel>
+
+<link rel="stylesheet" href="/css/Team/nicepage.css" media="screen" asp-append-version="true" >
+<link rel="stylesheet" href="/css/Team/AddTeam.css" media="screen" asp-append-version="true">
+
+<body class="u-body u-xl-mode">
+    <section class="u-clearfix u-section-1" id="sec-9bb9">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-expanded-width u-group u-shape-rectangle u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <div class="u-form u-form-1">
+              <form class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form" style="padding: 10px;">
+              <div class="u-container-style u-group u-palette-1-base u-radius-10 u-shape-round u-group-2">
+                <div class="u-container-layout u-container-layout-2">
+                  <div class="u-expanded-width u-form u-form-2">
+                    <form class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form-1" style="padding: 10px;">
+                      @foreach (var item in Model)
+                      {
+                          <div class="u-form-email u-form-group">
+                              <label for="email-8673" class="u-label">Program Type: </label>
+                              <label for="email-8673" class="u-label">@item.Program</label>
+                          </div>
+                          <div class="u-form-email u-form-group">
+                              <label for="email-8673" class="u-label">Training Description:</label>
+                              <label for="email-8673" class="u-label">@item.Description</label>
+                          </div>
+                          <div class="u-form-email u-form-group">
+                              <label for="email-8673" class="u-label">Training Type: </label>
+                              <label for="email-8673" class="u-label">@item.Type</label>
+                          </div>
+                          <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
+                              <a asp-controller="Train" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                              <a asp-controller="Train" asp-action="Remove" asp-route-id="@item.Id">Remove</a>
+                          </div>
+                      }
+                    </form>
+                  </div>
+                </div>
+              </div>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>

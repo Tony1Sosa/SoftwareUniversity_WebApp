@@ -1,0 +1,65 @@
+﻿
+@using WebApp.Core.Interfaces
+@using Microsoft.AspNetCore.Identity
+@using WebApp.Core.Models
+@inject UserManager<IdentityUser> userManager
+@{
+    var user = userManager.GetUserAsync(User);
+    var userId = user.Result.Id;
+}
+
+@{
+    ViewData["Title"] = "Player Info";
+    IEnumerable<PlayerViewModel> players = ViewData["players"] as IEnumerable<PlayerViewModel>;
+}
+@model IQueryable<WebApp.Core.Models.TeamViewModel>
+
+<link rel="stylesheet" href="/css/Team/nicepage.css" media="screen" asp-append-version="true" >
+<link rel="stylesheet" href="/css/Player/EditPlayer.css" media="screen" asp-append-version="true">
+
+<body class="u-body u-xl-mode">
+    <section class="u-clearfix u-section-1" id="sec-9bb9">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <div class="u-container-style u-expanded-width u-group u-shape-rectangle u-group-1">
+                <div class="u-container-layout u-container-layout-1">
+                    <div class="u-form u-form-1">
+                        <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form" style="padding: 10px;">
+                            <div class="u-container-style u-group u-palette-1-base u-radius-10 u-shape-round u-group-2">
+                                <div class="u-container-layout u-container-layout-2">
+                                    <div class="u-expanded-width u-form u-form-2">
+                                        <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form-1" style="padding: 10px;">
+                                            @foreach (var team in Model)
+                                            {
+                                                <div class="u-form-email u-form-group">
+                                                    <label for="email-8673" class="u-label">Name: </label>
+                                                    <input type="text" placeholder="@team.Name" name="Name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" spellcheck="false">
+                                                </div>
+                                                <div class="u-form-email u-form-group">
+                                                    <label for="email-8673" class="u-label">AgeSection: @team.AgeSection</label>
+                                                    <input type="number" placeholder="@team.AgeSection" id="date-e1ab" name="AgeSection" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                                                </div>
+                                                <div class="u-form-email u-form-group">
+                                                    @foreach (var player in players)
+                                                    {
+                                                        <label class="u-label">Player: @player.Name</label>
+                                                        <a asp-controller="Player" asp-action="Remove" asp-route-id="@player.Id">Remove</a>
+                                                        <a asp-controller="Player" asp-action="Edit" asp-route-id="@player.Id">Edit</a>
+                                                    }
+                                                </div>
+                                                <input name="UserId" type="hidden" value="@userId" />
+
+                                            }
+                                            <div class="u-align-center u-form-group u-form-submit">
+                                                <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Edit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  </body>

@@ -64,8 +64,7 @@
                               @foreach (var teamModel in Model.TeamViewModels)
                               {
                                   <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-1">
-                                      <label for="date-e1ab" class="u-label">@teamModel.Name</label>
-                                      <label for="date-e1ab" class="u-label">@teamModel.AgeSection</label>
+                                      <center><a asp-controller="Team" asp-action="ViewInfo" asp-route-id="@teamModel.Id">@teamModel.Name</a></center>
                                   </div>   
                               }   
                           }
@@ -109,7 +108,9 @@
                               @foreach (var trainigModel in Model.TrainingViewModels)
                               {
                                   <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-5">
-                                      <center>@trainigModel.Type || @trainigModel.</center>
+                                      <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
+                                          <center><a asp-controller="Train" asp-action="ViewInfo" asp-route-id="@trainigModel.Id">@trainigModel.Type - @trainigModel.Description</a></center>
+                                      </div>
                                   </div>
                               }   
                           }

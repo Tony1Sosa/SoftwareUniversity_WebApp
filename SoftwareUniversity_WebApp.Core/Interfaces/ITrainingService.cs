@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebApp.Core.Models;
+﻿using WebApp.Core.Models;
+using WebApp.Infrastructure.Data.Models;
 
 namespace WebApp.Core.Interfaces
 {
@@ -11,5 +7,9 @@ namespace WebApp.Core.Interfaces
     {
         public IEnumerable<TrainingViewModel> GetTrainings();
         public bool CreateTrainig(AddTrainingViewModel model);
+        public IQueryable<TrainingViewModel> FindTraining(string trainingId);
+
+        public bool EditTraining(TrainingViewModel model);
+        public bool RemoveTraining(string modelId);
     }
 }

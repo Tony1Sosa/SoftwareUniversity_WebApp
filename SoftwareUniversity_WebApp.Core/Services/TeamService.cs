@@ -51,5 +51,60 @@ namespace WebApp.Core.Services
 
             return teams;
         }
+
+        public IQueryable<TeamViewModel> FindTeam(string modelId)
+        {
+            var team = _repository.All<Team>()
+                .Where(t => t.Id == modelId)
+                .Select(t => new TeamViewModel()
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    AgeSection = t.AgeSection,
+                });
+
+            return team;
+        }
+
+        public bool EdditTeam(TeamViewModel model)
+        {
+            var team = _repository.All<Team>()
+                .FirstOrDefault(t => t.Id.Equals(model.Id));
+
+            team.Name = model.Name;
+            team.AgeSection = model.AgeSection;
+
+            try
+            {
+                _repository.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveTeam(string teamId)
+        {
+            var team = _repository.All<Team>().FirstOrDefault(t => t.Id == teamId);
+            var players = _repository.All<Player>().Where(p => p.TeamId == teamId);
+
+            try
+            {
+                foreach (Player player in players)
+                {
+                    _repository.Remove(player);
+                }
+                _repository.Remove(team);
+                _repository.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+        }
     }
 }

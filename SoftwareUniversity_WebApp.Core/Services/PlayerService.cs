@@ -113,10 +113,10 @@ namespace WebApp.Core.Services
             }
         }
 
-        public IEnumerable<PlayerViewModel> GetPlayers(string userId)
+        public IEnumerable<PlayerViewModel> GetPlayersByTeam(string teamId)
         {
             var players = repo.All<Player>()
-                .Where(p=> p.Team.UserId == userId)
+                .Where(p=> p.TeamId == teamId)
                 .Select(p => new PlayerViewModel()
                 {
                     Id = p.Id, 
