@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApp.Infrastructure.Migrations
 {
-    public partial class inital : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,20 @@ namespace WebApp.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Trainings",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Program = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trainings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,7 +196,8 @@ namespace WebApp.Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Type = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    TeamId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    TeamId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TrainingId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -191,6 +206,12 @@ namespace WebApp.Infrastructure.Migrations
                         name: "FK_Events_Teams_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Events_Trainings_TrainingId",
+                        column: x => x.TrainingId,
+                        principalTable: "Trainings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -213,27 +234,6 @@ namespace WebApp.Infrastructure.Migrations
                     table.PrimaryKey("PK_Players", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Players_Teams_TeamId",
-                        column: x => x.TeamId,
-                        principalTable: "Teams",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Trainings",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Program = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    TeamId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Trainings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Trainings_Teams_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Teams",
                         principalColumn: "Id",
@@ -285,6 +285,11 @@ namespace WebApp.Infrastructure.Migrations
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Events_TrainingId",
+                table: "Events",
+                column: "TrainingId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Players_TeamId",
                 table: "Players",
                 column: "TeamId");
@@ -293,11 +298,6 @@ namespace WebApp.Infrastructure.Migrations
                 name: "IX_Teams_UserId",
                 table: "Teams",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Trainings_TeamId",
-                table: "Trainings",
-                column: "TeamId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -324,10 +324,10 @@ namespace WebApp.Infrastructure.Migrations
                 name: "Players");
 
             migrationBuilder.DropTable(
-                name: "Trainings");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Trainings");
 
             migrationBuilder.DropTable(
                 name: "Teams");

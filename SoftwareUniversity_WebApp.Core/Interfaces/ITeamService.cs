@@ -10,7 +10,7 @@ namespace WebApp.Core.Interfaces
 
         public IQueryable<TeamViewModel> FindTeam(string modelId);
 
-        public bool EdditTeam(TeamViewModel model);
+        public bool EditTeam(TeamViewModel model);
 
         public bool RemoveTeam(string teamId);
     }

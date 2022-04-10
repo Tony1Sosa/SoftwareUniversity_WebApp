@@ -66,7 +66,7 @@ namespace WebApp.Core.Services
             return team;
         }
 
-        public bool EdditTeam(TeamViewModel model)
+        public bool EditTeam(TeamViewModel model)
         {
             var team = _repository.All<Team>()
                 .FirstOrDefault(t => t.Id.Equals(model.Id));

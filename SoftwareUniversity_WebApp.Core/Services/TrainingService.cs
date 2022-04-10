@@ -23,6 +23,7 @@ namespace WebApp.Core.Services
             var training = _repository.All<Training>()
                 .Select(t => new TrainingViewModel()
                 {
+                    Id= t.Id,
                     Type = t.Type,
                     Description = t.Description
 
@@ -36,7 +37,6 @@ namespace WebApp.Core.Services
             {
                 Training newTraining = new Training()
                 {
-                    TeamId = model.TeamId,
                     Program = model.Program,
                     Description = model.Description,
                     Type = model.Type
@@ -73,7 +73,6 @@ namespace WebApp.Core.Services
             var training = _repository.All<Training>().FirstOrDefault(t=> t.Id.Equals(model.Id));
             var team = _repository.All<Team>().FirstOrDefault(t => t.Id.Equals(model.TeamId));
 
-            training.Team = team;
             training.Description = model.Description;
             training.Type = model.Type;
             training.Program = model.Program;

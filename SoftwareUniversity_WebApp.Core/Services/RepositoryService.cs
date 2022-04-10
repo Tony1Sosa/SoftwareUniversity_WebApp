@@ -46,6 +46,7 @@ namespace WebApp.Core.Services
                 }).ToList();
 
             var teams = All<Team>()
+                .Where(t=> t.UserId == userId)
                 .Select(t => new TeamViewModel()
                 {
                     Id = t.Id,
@@ -57,16 +58,31 @@ namespace WebApp.Core.Services
                 .Select(t => new TrainingViewModel()
                 {
                     Id = t.Id,
+                    Program = t.Program,
                     Type = t.Type,
                     Description = t.Description
 
                 }).ToList();
 
+            var events = All<Event>()
+                .Where(e => e.Team.UserId == userId)
+                .Select(e => new EventViewModel()
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    Description = e.Description,
+                    Type = e.Type,
+                    TeamId = e.TeamId,
+                    TrainingId = e.TrainingId
+                });
+
             var model = new HomeViewModel()
             {
                 PlayerViewModels = players,
                 TeamViewModels = teams,
-                TrainingViewModels = trainigs
+                TrainingViewModels = trainigs,
+                EventViewModels = events,
+                UserId = userId
             };
 
             return model;

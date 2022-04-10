@@ -20,6 +20,10 @@ namespace WebApp.Infrastructure.Data.Models
         [ForeignKey(nameof(Team))]
         public string TeamId  { get; set; }
         public Team Team { get; set; }
+
+        [ForeignKey(nameof(Training))]
+        public string TrainingId { get; set; }
+        public Training Training { get; set; }
         
     }
 }

@@ -43,6 +43,23 @@ namespace WebApp.Core.Services
             return (passed,error);
         }
 
+        public IEnumerable<PlayerViewModel> GetPlayers(string UserId)
+        {
+            var players = repo.All<Player>()
+                .Where(p => p.Team.UserId == UserId)
+                .Select(p => new PlayerViewModel()
+                {
+                    Id = p.Id,
+                    Name = string.Concat(p.FirstName, p.LastName),
+                    BD = p.BirthDate,
+                    Number = p.Number,
+                    Possition = p.Position
+
+                }).ToList();
+
+            return players;
+        }
+
         public IQueryable<PlayerViewModel> FindPlayer(string modelId)
         {
             var player = repo.All<Player>()
@@ -129,5 +146,7 @@ namespace WebApp.Core.Services
 
             return players;
         }
+
+
     }
 }

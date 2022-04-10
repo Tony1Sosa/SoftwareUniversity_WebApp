@@ -66,7 +66,7 @@ namespace SoftwareUniversity_WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_teamService.EdditTeam(model))
+                if (_teamService.EditTeam(model))
                 {
                     return RedirectToAction("Home", "Home");
 

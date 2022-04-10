@@ -1,0 +1,49 @@
+﻿@using WebApp.Core.Interfaces
+
+@{
+    ViewData["Title"] = "Player Remove";
+}
+@model WebApp.Core.Models.EventViewModel
+
+<link rel="stylesheet" href="/css/Team/nicepage.css" media="screen" asp-append-version="true" >
+<link rel="stylesheet" href="/css/Team/AddTeam.css" media="screen" asp-append-version="true">
+
+<body class="u-body u-xl-mode">
+    <section class="u-clearfix u-section-1" id="sec-9bb9">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-expanded-width u-group u-shape-rectangle u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <div class="u-form u-form-1">
+              <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form" style="padding: 10px;">
+              <div class="u-container-style u-group u-palette-1-base u-radius-10 u-shape-round u-group-2">
+                <div class="u-container-layout u-container-layout-2">
+                  <div class="u-expanded-width u-form u-form-2">
+                    <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form-1" style="padding: 10px;">
+                        <div class="u-form-email u-form-group">
+                            <label for="email-8673" class="u-label">Name: </label>
+                            <label for="email-8673" class="u-label">@Model.Name</label>
+                        </div>
+                        <div class="u-form-email u-form-group">
+                            <label for="email-8673" class="u-label">Type: </label>
+                            <label for="email-8673" class="u-label">@Model.Type</label>
+                        </div>
+                        <div class="u-form-email u-form-group">
+                            <label for="email-8673" class="u-label">Description: </label>
+                            <label for="email-8673" class="u-label">@Model.Description</label>
+                        </div>
+                        <input name="Id" type="hidden" value="@Model.Id" />
+                        <div class="u-align-center u-form-group u-form-submit">
+                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Remove</button>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>

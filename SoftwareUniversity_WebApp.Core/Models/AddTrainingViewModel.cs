@@ -17,6 +17,8 @@ namespace WebApp.Core.Models
         public string Description { get; set; }
         [Required]
         public string Type { get; set; }
+
+        public string UserId { get; set; }
         
     }
 }
