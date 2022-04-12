@@ -12,8 +12,8 @@ using WebApp.Infrastructure.Data;
 namespace WebApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220409222735_initial")]
-    partial class initial
+    [Migration("20220411154743_inital")]
+    partial class inital
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -263,6 +263,28 @@ namespace WebApp.Infrastructure.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Match", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("PlayingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Matches");
+                });
+
             modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Player", b =>
                 {
                     b.Property<string>("Id")
@@ -311,6 +333,10 @@ namespace WebApp.Infrastructure.Migrations
                     b.Property<int>("AgeSection")
                         .HasMaxLength(5)
                         .HasColumnType("int");
+
+                    b.Property<string>("MatchId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -421,6 +447,17 @@ namespace WebApp.Infrastructure.Migrations
                     b.Navigation("Team");
 
                     b.Navigation("Training");
+                });
+
+            modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Match", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WebApp.Infrastructure.Data.Models.Player", b =>

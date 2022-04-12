@@ -19,5 +19,7 @@ namespace WebApp.Infrastructure.Data.Models
         [Required]
         [MaxLength(5)]
         public int AgeSection { get; set; }
+
+        public string MatchId { get; set; }
     }
 }

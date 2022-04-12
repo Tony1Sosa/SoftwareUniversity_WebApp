@@ -15,5 +15,7 @@ namespace WebApp.Core.Models
         public string Description { get; set; }
         public string TeamId { get; set; }
         public string TrainingId { get; set; }
+        public Team Team { get; set; }
+        public Training Training { get; set; }  
     }
 }

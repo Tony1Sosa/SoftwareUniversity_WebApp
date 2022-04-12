@@ -49,6 +49,10 @@ namespace WebApp.Core.Services
         public EventViewModel FindEvent(string eventId)
         {
             var foundEvent = _repository.All<Event>().FirstOrDefault(e => e.Id.Equals(eventId));
+
+            var team = _repository.All<Team>().FirstOrDefault(t => t.Id.Equals(foundEvent.TeamId));
+            var training = _repository.All<Training>().FirstOrDefault(t => t.Id.Equals(foundEvent.TrainingId));
+
             if (foundEvent != null)
             {
                 EventViewModel eventt = new EventViewModel()
@@ -58,7 +62,9 @@ namespace WebApp.Core.Services
                     TeamId = foundEvent.TeamId,
                     TrainingId = foundEvent.TrainingId,
                     Name = foundEvent.Name,
-                    Id = eventId
+                    Id = eventId,
+                    Team = team,
+                    Training = training
                 };
 
                 return eventt;

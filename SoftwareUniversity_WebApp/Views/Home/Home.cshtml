@@ -5,45 +5,50 @@
 
 @model WebApp.Core.Models.HomeViewModel
 @using Microsoft.AspNetCore.Identity
+@using WebApp.Core.Models
+@using WebApp.Infrastructure.Data.Models
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+<link rel="stylesheet" href="/css/nicepageHome.css" media="screen" asp-append-version="true" >
+<link rel="stylesheet" href="/css/Home.css" media="screen" asp-append-version="true">
     
-@if (SignInManager.IsSignedIn(User))
-{
-    <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Home</title>
-    
-    <link rel="stylesheet" href="/css/nicepageHome.css" media="screen" asp-append-version="true" >
-    <link rel="stylesheet" href="/css/Home.css" media="screen" asp-append-version="true">
-
-    <meta name="generator" content="Nicepage 4.6.9, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
-    <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Home">
-    <meta property="og:type" content="website">
-    <link rel="canonical" href="/">
-  </head>
-
-  <body class="u-body u-xl-mode">
-    <section class="u-clearfix u-section-1" id="sec-84db">
-      <div class="u-clearfix u-sheet u-sheet-1">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <body class="u-body u-xl-mode">
+        <section class="u-clearfix u-section-1" id="sec-84db">
+        <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-list u-list-1">
           <div class="u-repeater u-repeater-1">
-            <div class="u-border-8 u-border-grey-75 u-container-style u-list-item u-palette-1-dark-1 u-repeater-item u-shape-rectangle u-list-item-1">
-              <div class="u-container-layout u-similar-container u-container-layout-1">
-                  <a asp-area="" asp-controller="Team" asp-action="Add" class="u-btn u-btn-round u-button-style u-hover-feature u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2" data-animation-name="pulse" data-animation-duration="1000" data-animation-direction="">Add Team&nbsp;<span class="u-file-icon u-icon u-text-white u-icon-2"><img src="/icons/add.png" alt=""></span></a>
-                  <a asp-area="" asp-controller="Player" asp-action="Add" class="u-align-center u-btn  u-button-style u-hover-feature u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-1" data-animation-name="pulse" data-animation-duration="1000" data-animation-direction="">Add Player&nbsp;<span class="u-file-icon u-icon u-text-white u-icon-1"><img src="/icons/add.png" alt=""></span></a>
-                  <a asp-area="" asp-controller="Train" asp-action="Add" class="u-btn u-btn-round u-button-style u-hover-feature u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-5" data-animation-name="pulse" data-animation-duration="1000" data-animation-direction="">Add Training&nbsp;<span class="u-file-icon u-icon u-text-white u-icon-5"><img src="/icons/train.png" alt=""></span></a>
-                  <a asp-area="" asp-controller="Event" asp-action="Add" class="u-btn u-btn-round u-button-style u-hover-feature u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-3" data-animation-name="pulse" data-animation-duration="1000" data-animation-direction="">Add Event&nbsp;<span class="u-file-icon u-icon u-text-white u-icon-3"><img src="/icons/add.png" alt=""></span></a>
+              <div class="u-border-8 u-border-grey-75 u-container-style u-list-item u-palette-1-dark-1 u-repeater-item u-shape-rectangle u-list-item-1">
+                  <div class="u-container-layout u-similar-container u-container-layout-1">
+                      <a asp-area="" asp-controller="Team" asp-action="Add" class="u-btn u-btn-round u-button-style u-hover-feature u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-2" data-animation-name="pulse" data-animation-duration="1000" data-animation-direction="">Add Team&nbsp;<span class="u-file-icon u-icon u-text-white u-icon-2"><img src="/icons/add.png" alt=""></span></a>
+                      <a asp-area="" asp-controller="Player" asp-action="Add" class="u-align-center u-btn  u-button-style u-hover-feature u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-1" data-animation-name="pulse" data-animation-duration="1000" data-animation-direction="">Add Player&nbsp;<span class="u-file-icon u-icon u-text-white u-icon-1"><img src="/icons/add.png" alt=""></span></a>
+                      <a asp-area="" asp-controller="Train" asp-action="Add" class="u-btn u-btn-round u-button-style u-hover-feature u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-5" data-animation-name="pulse" data-animation-duration="1000" data-animation-direction="">Add Training&nbsp;<span class="u-file-icon u-icon u-text-white u-icon-5"><img src="/icons/add.png" alt=""></span></a>
+                      <a asp-area="" asp-controller="Event" asp-action="Add" class="u-btn u-btn-round u-button-style u-hover-feature u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-3" data-animation-name="pulse" data-animation-duration="1000" data-animation-direction="">Add Event&nbsp;<span class="u-file-icon u-icon u-text-white u-icon-3"><img src="/icons/add.png" alt=""></span></a>
+                      <a asp-area="" asp-controller="Match" asp-action="Add" class="u-btn u-btn-round u-button-style u-hover-feature u-hover-palette-1-light-1 u-palette-1-base u-radius-6 u-btn-3" data-animation-name="pulse" data-animation-duration="1000" data-animation-direction="">Add Match&nbsp;<span class="u-file-icon u-icon u-text-white u-icon-3"><img src="/icons/train.png" alt=""></span></a>
+                  </div>
               </div>
-            </div>
+              <div class="u-border-8 u-border-grey-75 u-container-style u-list-item u-palette-1-dark-1 u-repeater-item u-shape-rectangle u-list-item-1">
+                  <div class="u-container-layout u-similar-container u-container-layout-1">
+                      <center><label>Matches</label></center>
+                      @foreach (var macthViewModel in Model.MatchViewModels)
+                      {
+                          @if(macthViewModel.Team1.MatchId == null || macthViewModel.Team2.MatchId == null)
+                          {
+                              <div>
+                                  <center><label for="date-e1ab" class="u-label">There Are No Matches Yet!</label></center>
+                              </div>
+                          }
+                          else
+                          {
+                              <div>
+                                  <center><a asp-controller="Match" asp-action="ViewInfo" asp-route-id="@macthViewModel.Id">@macthViewModel.Team1.Name VS @macthViewModel.Team2.Name</a></center>
+                              </div>   
+                          }
+                      }
+                  </div>
+              </div>
           </div>
         </div>
         <div class="u-clearfix u-gutter-20 u-layout-wrap u-layout-wrap-1">
@@ -53,20 +58,24 @@
                 <div class="u-layout-col">
                   <div class="u-align-left u-container-style u-layout-cell u-palette-1-dark-1 u-shape-rectangle u-size-60 u-layout-cell-1">
                       <div class="u-border-20 u-border-grey-75 u-container-layout u-container-layout-2">
-                          @if (Model.TeamViewModels.Count() == 0)
+                          <center><label>Players</label></center>
+                          @if (Model.PlayerViewModels.Count() == 0)
                           {
-                              <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-1">
-                                  <center><label for="date-e1ab" class="u-label">There Are No Teams Yet!</label></center>
+                              <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
+                                  <center>There Are No Players Yet!</center>
                               </div>
                           }
                           else
                           {
-                              @foreach (var teamModel in Model.TeamViewModels)
+
+                              @foreach (var playerModel in Model.PlayerViewModels)
                               {
-                                  <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-1">
-                                      <center><a asp-controller="Team" asp-action="ViewInfo" asp-route-id="@teamModel.Id">@teamModel.Name</a></center>
-                                  </div>   
-                              }   
+                                  <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
+                                      <center><a asp-controller="Player" asp-action="ViewInfo" asp-route-id="@playerModel.Id">@playerModel.Name</a></center>
+
+                                      @*@Html.ActionLink(playerModel.Name, "ViewInfo", "Player", new {playerModel})*@
+                                  </div>
+                              }
                           }
                       </div>
                   </div>
@@ -76,27 +85,28 @@
                 <div class="u-layout-col">
                   <div class="u-container-style u-layout-cell u-palette-1-dark-1 u-shape-rectangle u-size-30 u-layout-cell-2">
                       <div class="u-border-20 u-border-grey-75 u-container-layout u-container-layout-3">
-                          @if (Model.PlayerViewModels.Count() == 0)
+                          <center><label>Teams</label></center>
+                          @if (Model.TeamViewModels.Count() == 0)
                           {
-                              <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
-                                  <center>There Are No Players Yet!</center>
+                              <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-1">
+                                  <center><label for="date-e1ab" class="u-label">There Are No Teams Yet!</label></center>
                               </div>
                           }
                           else
                           {
-                              @foreach (var playerModel in Model.PlayerViewModels)
-                              {
-                                  <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
-                                      <center><a asp-controller="Player" asp-action="ViewInfo" asp-route-id="@playerModel.Id">@playerModel.Name</a></center>
 
-                                      @*@Html.ActionLink(playerModel.Name, "ViewInfo", "Player", new {playerModel})*@
+                              @foreach (var teamModel in Model.TeamViewModels)
+                              {
+                                  <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-1">
+                                      <center><a asp-controller="Team" asp-action="ViewInfo" asp-route-id="@teamModel.Id">@teamModel.Name</a></center>
                                   </div>
-                              }   
+                              }
                           }
                       </div>
                   </div>
                     <div class="u-container-style u-layout-cell u-palette-1-dark-1 u-shape-rectangle u-size-30 u-layout-cell-3">
                         <div class="u-border-20 u-border-grey-75 u-container-layout u-container-layout-4">
+                            <center><label>Trainings</label></center>
                             @if (Model.TrainingViewModels.Count() == 0)
                             {
                                 <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-5">
@@ -105,19 +115,23 @@
                             }
                             else
                             {
+
                                 @foreach (var trainigModel in Model.TrainingViewModels)
                                 {
-                                    <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-5">
-                                        <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
-                                            <center><a asp-controller="Train" asp-action="ViewInfo" asp-route-id="@trainigModel.Id">@trainigModel.Type - @trainigModel.Description</a></center>
-                                        </div>
-                                    </div>
-                                }   
+                                    
+                                        <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-5">
+                                            <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
+                                                <center><a asp-controller="Train" asp-action="ViewInfo" asp-route-id="@trainigModel.Id">@trainigModel.Type - @trainigModel.Description</a></center>
+                                            </div>
+                                        </div>   
+                                    
+                                }
                             }
                         </div>
                     </div>
                     <div class="u-container-style u-layout-cell u-palette-1-dark-1 u-shape-rectangle u-size-30 u-layout-cell-3">
                         <div class="u-border-20 u-border-grey-75 u-container-layout u-container-layout-4">
+                            <center><label>Events</label></center>
                             @if (Model.EventViewModels.Count() == 0)
                             {
                                 <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-5">
@@ -126,6 +140,7 @@
                             }
                             else
                             {
+
                                 @foreach (var eventViewModel in Model.EventViewModels)
                                 {
                                     <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-5">
@@ -133,7 +148,7 @@
                                             <center><a asp-controller="Event" asp-action="ViewInfo" asp-route-id="@eventViewModel.Id">@eventViewModel.Name - @eventViewModel.Type</a></center>
                                         </div>
                                     </div>
-                                }   
+                                }
                             }
                         </div>
                     </div>
@@ -142,16 +157,10 @@
             </div>
           </div>
         </div>
-      </div>
-      
-      
-      
-      
-      
-    </section>
-    
-  </body>
-}
+         </div>
+        </section>
+        </body>
+    }
 else
 {
     <head>

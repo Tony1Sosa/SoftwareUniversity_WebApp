@@ -2,6 +2,7 @@
 @using WebApp.Core.Interfaces
 @using Microsoft.AspNetCore.Identity
 @using WebApp.Core.Models
+
 @inject UserManager<IdentityUser> userManager
 @{
     var user = userManager.GetUserAsync(User);

@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Team ViewInfo";
 }
-@model HomeViewModel
+@model EventViewModel
 
 <link rel="stylesheet" href="/css/Team/nicepage.css" media="screen" asp-append-version="true" >
 <link rel="stylesheet" href="/css/Team/AddTeam.css" media="screen" asp-append-version="true">
@@ -20,37 +20,36 @@
                       <div class="u-container-layout u-container-layout-2">
                           <div class="u-expanded-width u-form u-form-2">
                               <form class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form-1" style="padding: 10px;">
-                                  @foreach (var eventt in Model.EventViewModels)
-                                  {
-                                      var train = Model.TrainingViewModels.FirstOrDefault(t => t.Id == eventt.TrainingId);
-                                      var team = Model.TeamViewModels.FirstOrDefault(t => t.Id == eventt.TeamId);
+                                  @{
+                                      var train = Model.TeamId;
+                                      var team = Model.TrainingId;
+                                      }
 
                                       <div class="u-form-email u-form-group">
                                           <label for="email-8673" class="u-label">Name: </label>
-                                          <label for="email-8673" class="u-label">@eventt.Name</label>
+                                          <label for="email-8673" class="u-label">@Model.Name</label>
                                       </div>
                                       <div class="u-form-email u-form-group">
                                           <label for="email-8673" class="u-label">Type: </label>
-                                          <label for="email-8673" class="u-label">@eventt.Type</label>
+                                          <label for="email-8673" class="u-label">@Model.Type</label>
                                       </div>
                                       <div class="u-form-email u-form-group">
                                           <label for="email-8673" class="u-label">Description: </label>
-                                          <label for="email-8673" class="u-label">@eventt.Description</label>
+                                          <label for="email-8673" class="u-label">@Model.Description</label>
                                       </div>
                                       <div class="u-form-email u-form-group">
                                           <label for="email-8673" class="u-label">Training: </label>
-                                          <label for="email-8673" class="u-label">@train.Type @train.Program</label>
+                                          <label for="email-8673" class="u-label">@Model.Training.Type @Model.Training.Program</label>
                                       </div>
                                       <div class="u-form-email u-form-group">
                                           <label for="email-8673" class="u-label">Team: </label>
-                                          <label for="email-8673" class="u-label">@team.Name @team.AgeSection</label>
+                                          <label for="email-8673" class="u-label">@Model.Team.Name @Model.Team.AgeSection</label>
                                       </div>
 
                                       <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
-                                          <a asp-controller="Event" asp-action="Edit" asp-route-id="@eventt.Id">Edit</a>
-                                          <a asp-controller="Event" asp-action="Remove" asp-route-id="@eventt.Id">Remove</a>
+                                          <a asp-controller="Event" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                                          <a asp-controller="Event" asp-action="Remove" asp-route-id="@Model.Id">Remove</a>
                                       </div>
-                                  }
                               </form>
                           </div>
                       </div>

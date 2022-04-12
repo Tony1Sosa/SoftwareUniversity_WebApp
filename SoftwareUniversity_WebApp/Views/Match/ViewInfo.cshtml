@@ -1,0 +1,60 @@
+﻿@using WebApp.Core.Interfaces
+
+@{
+    ViewData["Title"] = "Match ViewInfo";
+}
+@model WebApp.Core.Models.MatchViewModel
+
+<link rel="stylesheet" href="/css/Team/nicepage.css" media="screen" asp-append-version="true" >
+<link rel="stylesheet" href="/css/Team/AddTeam.css" media="screen" asp-append-version="true">
+
+<body class="u-body u-xl-mode">
+    <section class="u-clearfix u-section-1" id="sec-9bb9">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-expanded-width u-group u-shape-rectangle u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <div class="u-form u-form-1">
+              <form class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form" style="padding: 10px;">
+              <div class="u-container-style u-group u-palette-1-base u-radius-10 u-shape-round u-group-2">
+                <div class="u-container-layout u-container-layout-2">
+                  <div class="u-expanded-width u-form u-form-2">
+                    <form class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form-1" style="padding: 10px;">
+                      @{
+                          var team1 = Model.Team1;
+                          var team2 = Model.Team2;
+                      }
+                      
+                          <div class="u-form-email u-form-group">
+                              <label for="email-8673" class="u-label">Date: </label>
+                              <label for="email-8673" class="u-label">@Model.PlayingDate.Date.ToString("yy-MM-dd")</label>
+                          </div>
+                          <div class="u-form-email u-form-group">
+                              <label for="email-8673" class="u-label">Time: </label>
+                              <label for="email-8673" class="u-label">@Model.Time.TimeOfDay</label>
+                          </div>
+                          <div class="u-form-email u-form-group">
+                              <label for="email-8673" class="u-label">Home: </label>
+                              <label for="email-8673" class="u-label">@team1.Name</label>
+                          </div>
+                          <div class="u-form-email u-form-group">
+                              <label for="email-8673" class="u-label">Away: </label>
+                              <label for="email-8673" class="u-label">@team2.Name</label>
+                          </div>
+
+                        <div class="u-palette-1-base u-radius-10 u-shape u-shape-round u-shape-3">
+                              <a asp-controller="Match" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                              <a asp-controller="Match" asp-action="Remove" asp-route-id="@Model.Id">Remove</a>
+                          </div>
+                      
+                    </form>
+                  </div>
+                </div>
+              </div>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>

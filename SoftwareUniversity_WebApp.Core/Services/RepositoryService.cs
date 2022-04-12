@@ -51,11 +51,12 @@ namespace WebApp.Core.Services
                 {
                     Id = t.Id,
                     Name = t.Name,
-                    AgeSection = t.AgeSection
+                    AgeSection = t.AgeSection,
+                    MatchId = t.MatchId
                 }).ToList();
 
             var trainigs = All<Training>()
-                .Select(t => new TrainingViewModel()
+                .Select(t =>  new TrainingViewModel()
                 {
                     Id = t.Id,
                     Program = t.Program,
@@ -74,7 +75,27 @@ namespace WebApp.Core.Services
                     Type = e.Type,
                     TeamId = e.TeamId,
                     TrainingId = e.TrainingId
-                });
+                }).ToList();
+
+            var matches = All<Match>()
+                .Where(mm => mm.UserId == userId)
+                .Select(m => new MatchViewModel()
+                {
+                    Id = m.Id,
+                    PlayingDate = m.PlayingDate,
+                    Time = m.Time,
+                    Team1 = All<Team>()
+                        .Where(t=> t.UserId == m.UserId)
+                        .Where(t=>t.MatchId == m.Id)
+                        .OrderByDescending(t=> t.Name)
+                        .First(),
+
+                    Team2 = All<Team>()
+                        .Where(t => t.UserId == m.UserId)
+                        .Where(t => t.MatchId == m.Id)
+                        .OrderByDescending(t => t.Name)
+                        .Last()
+                }).ToList();
 
             var model = new HomeViewModel()
             {
@@ -82,6 +103,7 @@ namespace WebApp.Core.Services
                 TeamViewModels = teams,
                 TrainingViewModels = trainigs,
                 EventViewModels = events,
+                MatchViewModels = matches,
                 UserId = userId
             };
 

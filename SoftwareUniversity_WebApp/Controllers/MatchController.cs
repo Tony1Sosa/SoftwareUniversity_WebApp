@@ -5,20 +5,18 @@ using WebApp.Core.Models;
 
 namespace SoftwareUniversity_WebApp.Controllers
 {
-    public class EventController : Controller
+    public class MatchController : Controller
     {
+        private readonly IMatchService _matchService;
         private readonly IRepository _repository;
-        private readonly IEventService _eventService;
         private readonly ITeamService _tenantService;
-        private readonly ITrainingService _trainingService;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public EventController(IRepository repository, IEventService eventService, UserManager<IdentityUser> userManager, IPlayerService playerService, ITrainingService trainingService, ITeamService tenantService)
+        public MatchController(IMatchService matchService, IRepository repository, UserManager<IdentityUser> userManager, ITeamService tenantService)
         {
+            _matchService = matchService;
             _repository = repository;
-            _eventService = eventService;
             _userManager = userManager;
-            _trainingService = trainingService;
             _tenantService = tenantService;
         }
 
@@ -26,17 +24,17 @@ namespace SoftwareUniversity_WebApp.Controllers
         {
             var user = _userManager.GetUserAsync(User);
             var userId = user.Result.Id;
-            var dbViewModels = _repository.GetEntitiesFromDb(userId);
+            var dbEntities = _repository.GetEntitiesFromDb(userId);
 
-            return View(dbViewModels);
+            return View(dbEntities);
         }
 
         [HttpPost]
-        public IActionResult Add(AddEventViewModel model)
+        public IActionResult Add(AddMatchViewModel model)
         {
             if (ModelState.IsValid)
             {
-                if (_eventService.CreateEvent(model))
+                if (_matchService.CreateMatch(model))
                 {
                     return RedirectToAction("Home", "Home");
                 }
@@ -49,9 +47,9 @@ namespace SoftwareUniversity_WebApp.Controllers
 
         public IActionResult ViewInfo(string id)
         {
-            var eventmodeel = _eventService.FindEvent(id);
+            var matchModel = _matchService.FindMatch(id);
 
-            return View(eventmodeel);
+            return View(matchModel);
         }
 
         public IActionResult Edit(string id)
@@ -59,40 +57,24 @@ namespace SoftwareUniversity_WebApp.Controllers
             var user = _userManager.GetUserAsync(User);
             var userId = user.Result.Id;
 
-            var eventt = _eventService.FindEvent(id);
+            var match = _matchService.FindMatch(id);
             ViewData["teams"] = _tenantService.GetTeams(userId);
-            ViewData["trainings"] = _trainingService.GetTrainings();
-            return View(eventt);
+
+            return View(match);
         }
 
         [HttpPost]
-        public IActionResult Edit(EventViewModel model)
+        public IActionResult Edit(AddMatchViewModel model)
         {
             if (ModelState.IsValid)
             {
-                if (_eventService.EditEvent(model))
+                if (_matchService.EditMatch(model))
                 {
                     return RedirectToAction("Home", "Home");
 
                 }
                 return RedirectToAction("Error", "Home");
 
-            }
-            return RedirectToAction("Error", "Home");
-        }
-
-        public IActionResult Remove(string id)
-        {
-            var eventt = _eventService.FindEvent(id);
-            return View(eventt);
-        }
-
-        [HttpPost]
-        public IActionResult Remove(EventViewModel model)
-        {
-            if (_eventService.RemoveEvent(model.Id))
-            {
-                return RedirectToAction("Home", "Home");
             }
             return RedirectToAction("Error", "Home");
         }

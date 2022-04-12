@@ -21,7 +21,10 @@ namespace WebApp.Core.Models
         [StringLength(200, MinimumLength = 5, ErrorMessage = "Event {0} must be between {2} and {1}")]
         public string Description { get; set; }
 
+        [Required(ErrorMessage = "Team is required.")]
         public string TeamId { get; set; }
+
+        [Required(ErrorMessage = "Training is required.")]
         public string TrainingId { get; set; }
 
     }

@@ -6154,7 +6154,7 @@ section.u-image:not(.u-hover-box),
   min-width: 98.33333333%;
 }
 .u-layout-col > .u-size-59 {
-  flex: 59 0 98.33333333%;
+  flex: 59 0 50%;
 }
 .u-layout-row > .u-size-58 {
   flex: 0 0 96.66666667%;
@@ -6162,7 +6162,7 @@ section.u-image:not(.u-hover-box),
   min-width: 96.66666667%;
 }
 .u-layout-col > .u-size-58 {
-  flex: 58 0 96.66666667%;
+  flex: 58 0 50%;
 }
 .u-layout-row > .u-size-57 {
   flex: 0 0 95%;
@@ -9815,7 +9815,7 @@ section.u-image:not(.u-hover-box),
     min-width: 50%;
   }
   .u-layout-col > .u-size-30-xs {
-    flex: 30 0 50%;
+    flex: 30 0 50;
   }
   .u-layout-row > .u-size-29-xs {
     flex: 0 0 48.33333333%;

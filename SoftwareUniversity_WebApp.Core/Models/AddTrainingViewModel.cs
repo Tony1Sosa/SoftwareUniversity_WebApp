@@ -9,12 +9,17 @@ namespace WebApp.Core.Models
 {
     public class AddTrainingViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Team is required")]
         public string TeamId { get; set; }
+
         [Required]
+        //Its select input
         public string  Program { get; set; }
+
         [Required]
+        //Its select input
         public string Description { get; set; }
+
         [Required]
         public string Type { get; set; }
 

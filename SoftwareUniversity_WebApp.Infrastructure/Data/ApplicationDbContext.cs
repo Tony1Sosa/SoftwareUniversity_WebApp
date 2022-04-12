@@ -15,5 +15,6 @@ namespace WebApp.Infrastructure.Data
         public DbSet<Team> Teams { get; set; }
         public DbSet<Training> Trainings { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Match> Matches { get; set; }
     }
 }

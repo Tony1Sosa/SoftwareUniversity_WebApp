@@ -29,7 +29,8 @@ namespace WebApp.Core.Services
             {
                 Name = model.Name,
                 AgeSection = model.AgeSection,
-                UserId = model.UserId
+                UserId = model.UserId,
+                MatchId = "NoMatchGiven"
             };
 
             _repository.Add(newTeam);
