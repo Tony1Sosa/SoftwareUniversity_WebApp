@@ -95,9 +95,19 @@ namespace WebApp.Core.Services
             }
         }
 
-        public bool RemoveMatch(string modelId)
+        public bool RemoveMatch(MatchViewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var match = _repository.All<Match>().FirstOrDefault(m => m.Id.Equals(model.Id));
+                _repository.Remove(match);
+                _repository.SaveChanges();
+                return true;
+            }
+            catch (Exception )
+            {
+                return false;
+            }
         }
     }
 }

@@ -78,5 +78,28 @@ namespace SoftwareUniversity_WebApp.Controllers
             }
             return RedirectToAction("Error", "Home");
         }
+
+        public IActionResult Remove(string id)
+        {
+            var team = _matchService.FindMatch(id);
+
+            return View(team);
+        }
+
+        [HttpPost]
+        public IActionResult Remove(MatchViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_matchService.RemoveMatch(model))
+                {
+                    return RedirectToAction("Home", "Home");
+
+                }
+                return RedirectToAction("Error", "Home");
+
+            }
+            return RedirectToAction("Error", "Home");
+        }
     }
 }

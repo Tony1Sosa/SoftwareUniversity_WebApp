@@ -12,6 +12,6 @@ namespace WebApp.Core.Interfaces
         public bool CreateMatch(AddMatchViewModel model);
         public MatchViewModel FindMatch(string id);
         public bool EditMatch(AddMatchViewModel model);
-        bool RemoveMatch(string modelId);
+        bool RemoveMatch(MatchViewModel model);
     }
 }
