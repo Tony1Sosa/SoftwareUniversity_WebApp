@@ -90,14 +90,23 @@ namespace WebApp.Core.Services
         {
             var team = _repository.All<Team>().FirstOrDefault(t => t.Id == teamId);
             var players = _repository.All<Player>().Where(p => p.TeamId == teamId);
+            Match match = default;
 
             try
             {
+                if (team.MatchId != null)
+                {
+                    string matchId = team.MatchId;
+                    match = _repository.All<Match>().FirstOrDefault(m => m.Id.Equals(matchId));
+                }
+
                 foreach (Player player in players)
                 {
                     _repository.Remove(player);
                 }
+
                 _repository.Remove(team);
+                _repository.Remove(match);
                 _repository.SaveChanges();
                 return true;
             }

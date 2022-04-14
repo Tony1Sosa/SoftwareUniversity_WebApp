@@ -34,17 +34,17 @@
                       <center><label>Matches</label></center>
                       @foreach (var macthViewModel in Model.MatchViewModels)
                       {
-                          @if(macthViewModel.Team1.MatchId == null || macthViewModel.Team2.MatchId == null)
+                          @if(macthViewModel.Team1 != null || macthViewModel.Team2 != null)
                           {
                               <div>
-                                  <center><label for="date-e1ab" class="u-label">There Are No Matches Yet!</label></center>
+                                  <center><a asp-controller="Match" asp-action="ViewInfo" asp-route-id="@macthViewModel.Id">@macthViewModel.Team1.Name VS @macthViewModel.Team2.Name</a></center>
                               </div>
                           }
                           else
                           {
                               <div>
-                                  <center><a asp-controller="Match" asp-action="ViewInfo" asp-route-id="@macthViewModel.Id">@macthViewModel.Team1.Name VS @macthViewModel.Team2.Name</a></center>
-                              </div>   
+                                  <center><label for="date-e1ab" class="u-label">There Are No Matches Yet!</label></center>
+                              </div>
                           }
                       }
                   </div>

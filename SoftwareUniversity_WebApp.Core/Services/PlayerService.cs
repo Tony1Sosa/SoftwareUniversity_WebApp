@@ -19,7 +19,7 @@ namespace WebApp.Core.Services
             this.repo = repo;
         }
 
-        public (bool Passed, string Error) CreatePlayer(AddPlayerViewModel model)
+        public bool CreatePlayer(AddPlayerViewModel model)
         {
             bool passed = true;
             string error = string.Empty;
@@ -40,7 +40,7 @@ namespace WebApp.Core.Services
             repo.Add(newPlayer);
             repo.SaveChanges();
 
-            return (passed,error);
+            return passed;
         }
 
         public IEnumerable<PlayerViewModel> GetPlayers(string UserId)

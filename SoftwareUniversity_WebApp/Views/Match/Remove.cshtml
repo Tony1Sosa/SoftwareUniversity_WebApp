@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Match Remove";
+    var team1 = Model.Team1;
+    var team2 = Model.Team2;
 }
 @model WebApp.Core.Models.MatchViewModel
 
@@ -19,26 +21,34 @@
                 <div class="u-container-layout u-container-layout-2">
                   <div class="u-expanded-width u-form u-form-2">
                     <form method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="email" name="form-1" style="padding: 10px;">
-                        <div class="u-form-email u-form-group">
-                            <label for="email-8673" class="u-label">Date: </label>
-                            <label for="email-8673" class="u-label">@Model.PlayingDate.ToString("MM/dd/yyyy")</label>
-                        </div>
-                        <div class="u-form-email u-form-group">
-                            <label for="email-8673" class="u-label">Time: </label>
-                            <label for="email-8673" class="u-label">@Model.Time.TimeOfDay</label>
-                        </div>
-                        <div class="u-form-email u-form-group">
-                            <label for="email-8673" class="u-label">Home Team: </label>
-                            <label for="email-8673" class="u-label">@Model.Team1.Name</label>
-                        </div>
-                        <div class="u-form-email u-form-group">
-                            <label for="email-8673" class="u-label">Away Team: </label>
-                            <label for="email-8673" class="u-label">@Model.Team2.Name</label>
-                        </div>
-                        <input name="Id" type="hidden" value="@Model.Id" />
-                        <div class="u-align-center u-form-group u-form-submit">
-                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Remove</button>
-                        </div>
+                        @{
+                            <div class="u-form-email u-form-group">
+                                <label for="email-8673" class="u-label">Date: </label>
+                                <label for="email-8673" class="u-label">@Model.PlayingDate.ToString("MM/dd/yyyy")</label>
+                                <input name="PlayingDate" type="hidden" value="@Model.PlayingDate" />
+                            </div>
+                            <div class="u-form-email u-form-group">
+                                <label for="email-8673" class="u-label">Time: </label>
+                                <label for="email-8673" class="u-label">@Model.Time.TimeOfDay</label>
+                                <input name="Time" type="hidden" value="@Model.Time" />
+                            </div>
+                            <div class="u-form-email u-form-group">
+                                <label for="email-8673" class="u-label">Home Team: </label>
+                                <label for="email-8673" class="u-label">@Model.Team1.Name</label>
+                                <input name="Team1" type="hidden" value="@team1" />
+                                <input name="Team1Id" type="hidden" value="@Model.Team1.Id" />
+                            </div>
+                            <div class="u-form-email u-form-group">
+                                <label for="email-8673" class="u-label">Away Team: </label>
+                                <label for="email-8673" class="u-label">@Model.Team2.Name</label>
+                                <input name="Team2" type="hidden" value="@team2" />
+                                <input name="Team2Id" type="hidden" value="@Model.Team2.Id" />
+                            </div>
+                            <input name="Id" type="hidden" value="@Model.Id" />
+                            <div class="u-align-center u-form-group u-form-submit">
+                                <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Remove</button>
+                            </div>
+                        }
                     </form>
                   </div>
                 </div>

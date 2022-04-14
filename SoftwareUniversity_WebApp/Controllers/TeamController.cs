@@ -10,13 +10,15 @@ namespace SoftwareUniversity_WebApp.Controllers
     {
         private readonly ITeamService _teamService;
         private readonly IPlayerService _playerService;
+        private readonly IValidationService _validator;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public TeamController(ITeamService teamService, UserManager<IdentityUser> userManager, IPlayerService playerService)
+        public TeamController(ITeamService teamService, UserManager<IdentityUser> userManager, IPlayerService playerService, IValidationService validator)
         {
             _teamService = teamService;
             _userManager = userManager;
             _playerService = playerService;
+            _validator = validator;
         }
         public IActionResult Add()
         {
@@ -25,8 +27,8 @@ namespace SoftwareUniversity_WebApp.Controllers
 
         [HttpPost]
         public IActionResult Add(AddTeamViewModel model)
-
         {
+            (bool passed1, string error1) = _validator.ValidateModel(model);
             if (ModelState.IsValid)
             {
                 (bool passed, string error) = _teamService.CreateTeam(model);
@@ -37,12 +39,12 @@ namespace SoftwareUniversity_WebApp.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Error", "Home");
+                    return RedirectToAction("Error", "Home", new { error1 });
                 }
             }
             else
             {
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", "Home", new { error1 });
             }
         }
 
@@ -64,6 +66,7 @@ namespace SoftwareUniversity_WebApp.Controllers
         [HttpPost]
         public IActionResult Edit(TeamViewModel model)
         {
+            (bool passed1, string error1) = _validator.ValidateModel(model);
             if (ModelState.IsValid)
             {
                 if (_teamService.EditTeam(model))
@@ -71,10 +74,10 @@ namespace SoftwareUniversity_WebApp.Controllers
                     return RedirectToAction("Home", "Home");
 
                 }
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", "Home", new { error1 });
 
             }
-            return RedirectToAction("Error", "Home");
+            return RedirectToAction("Error", "Home", new { error1 });
         }
 
         public IActionResult Remove(string id)

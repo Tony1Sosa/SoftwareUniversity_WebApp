@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SoftwareUniversity_WebApp.Models;
 using WebApp.Core.Interfaces;
 using WebApp.Core.Models;
 
@@ -11,15 +12,17 @@ namespace SoftwareUniversity_WebApp.Controllers
         private readonly IEventService _eventService;
         private readonly ITeamService _tenantService;
         private readonly ITrainingService _trainingService;
+        private readonly IValidationService _validator;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public EventController(IRepository repository, IEventService eventService, UserManager<IdentityUser> userManager, IPlayerService playerService, ITrainingService trainingService, ITeamService tenantService)
+        public EventController(IRepository repository, IEventService eventService, UserManager<IdentityUser> userManager, IPlayerService playerService, ITrainingService trainingService, ITeamService tenantService, IValidationService validator)
         {
             _repository = repository;
             _eventService = eventService;
             _userManager = userManager;
             _trainingService = trainingService;
             _tenantService = tenantService;
+            _validator = validator;
         }
 
         public IActionResult Add()
@@ -34,6 +37,7 @@ namespace SoftwareUniversity_WebApp.Controllers
         [HttpPost]
         public IActionResult Add(AddEventViewModel model)
         {
+            (bool passed1, string error1) = _validator.ValidateModel(model);
             if (ModelState.IsValid)
             {
                 if (_eventService.CreateEvent(model))
@@ -41,10 +45,10 @@ namespace SoftwareUniversity_WebApp.Controllers
                     return RedirectToAction("Home", "Home");
                 }
 
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", "Home", new { error1 });
             }
 
-            return RedirectToAction("Error", "Home");
+            return RedirectToAction("Error", "Home", new { error1 });
         }
 
         public IActionResult ViewInfo(string id)
@@ -68,6 +72,7 @@ namespace SoftwareUniversity_WebApp.Controllers
         [HttpPost]
         public IActionResult Edit(EventViewModel model)
         {
+            (bool passed1, string error1) = _validator.ValidateModel(model);
             if (ModelState.IsValid)
             {
                 if (_eventService.EditEvent(model))
@@ -75,10 +80,10 @@ namespace SoftwareUniversity_WebApp.Controllers
                     return RedirectToAction("Home", "Home");
 
                 }
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", "Home", new { error1 });
 
             }
-            return RedirectToAction("Error", "Home");
+            return RedirectToAction("Error", "Home", new { error1 });
         }
 
         public IActionResult Remove(string id)

@@ -26,6 +26,11 @@ namespace WebApp.Core.Services
                 Team team1 = _repository.All<Team>().FirstOrDefault(t => t.Id.Equals(model.Team1Id));
                 Team team2 = _repository.All<Team>().FirstOrDefault(t => t.Id.Equals(model.Team2Id));
 
+                if (team1.Id.Equals(team2.Id))
+                {
+                    return false;
+                }
+
                 Match newMatch = new Match()
                 {
                     PlayingDate = model.Date,
@@ -100,7 +105,7 @@ namespace WebApp.Core.Services
             try
             {
                 var match = _repository.All<Match>().FirstOrDefault(m => m.Id.Equals(model.Id));
-                _repository.Remove(match);
+                _repository.Remove(match);  
                 _repository.SaveChanges();
                 return true;
             }

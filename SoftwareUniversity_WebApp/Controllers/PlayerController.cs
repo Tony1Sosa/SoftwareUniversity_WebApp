@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SoftwareUniversity_WebApp.Models;
 using WebApp.Core.Interfaces;
 using WebApp.Core.Models;
-using WebApp.Infrastructure.Data.Models;
 
 namespace SoftwareUniversity_WebApp.Controllers
 {
@@ -11,11 +10,13 @@ namespace SoftwareUniversity_WebApp.Controllers
     {
         private readonly IPlayerService _playerService;
         private readonly IRepository _repository;
+        private readonly  IValidationService _validator;
 
-        public PlayerController(IPlayerService playerService, IRepository repository)
+        public PlayerController(IPlayerService playerService, IRepository repository, IValidationService validator)
         {
             _playerService = playerService;
             _repository = repository;
+            _validator = validator;
         }
 
         public IActionResult Add()
@@ -28,18 +29,18 @@ namespace SoftwareUniversity_WebApp.Controllers
         [HttpPost]
         public IActionResult Add(AddPlayerViewModel model)
         {
-            if (ModelState.IsValid)
+            (bool passed1, string error1) = _validator.ValidateModel(model);
+            if (passed1)
             {
-                (bool passed , string error) = _playerService.CreatePlayer(model);
-                if (passed = true)
+                if (_playerService.CreatePlayer(model))
                 {
                     return RedirectToAction("Home", "Home");
                 }
 
-                return RedirectToAction("Error", "Home", error);
+                return RedirectToAction("Error", "Home", new{error1});
             }
 
-            return RedirectToAction("Error", "Home");
+            return RedirectToAction("Error", "Home", new { error1 });
         }
 
         public IActionResult ViewInfo(string id)
@@ -59,7 +60,7 @@ namespace SoftwareUniversity_WebApp.Controllers
         [HttpPost]
         public IActionResult Edit(PlayerViewModel model)
         {
-
+            (bool passed1, string error1) = _validator.ValidateModel(model);
             if (ModelState.IsValid)
             {
                 if (_playerService.EditPlayer(model))
@@ -67,10 +68,10 @@ namespace SoftwareUniversity_WebApp.Controllers
                     return RedirectToAction("Home", "Home");
                 }
 
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", "Home", new { error1 });
             }
 
-            return RedirectToAction("Error", "Home");
+            return RedirectToAction("Error", "Home", new { error1 });
         }
 
         public IActionResult Remove(string id)

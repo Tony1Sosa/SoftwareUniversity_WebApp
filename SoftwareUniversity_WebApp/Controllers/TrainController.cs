@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
+using SoftwareUniversity_WebApp.Models;
 using WebApp.Core.Interfaces;
 using WebApp.Core.Models;
 
@@ -9,11 +10,13 @@ namespace SoftwareUniversity_WebApp.Controllers
     {
         private readonly ITeamService _teamService;
         private readonly ITrainingService _trainingService;
+        private readonly IValidationService _validator;
 
-        public TrainController(ITeamService teamService, ITrainingService trainingService)
+        public TrainController(ITeamService teamService, ITrainingService trainingService, IValidationService validator)
         {
             _teamService = teamService;
             _trainingService = trainingService;
+            _validator = validator;
         }
         public IActionResult Add()
         {
@@ -25,6 +28,7 @@ namespace SoftwareUniversity_WebApp.Controllers
         [HttpPost]
         public IActionResult Add(AddTrainingViewModel model)
         {
+            (bool passed1, string error1) = _validator.ValidateModel(model);
             if (ModelState.IsValid)
             {
                 if (_trainingService.CreateTrainig(model))
@@ -32,10 +36,10 @@ namespace SoftwareUniversity_WebApp.Controllers
                     return RedirectToAction("Home", "Home");
 
                 }
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", "Home", new { error1 });
 
             }
-            return RedirectToAction("Error", "Home");
+            return RedirectToAction("Error", "Home", new { error1 });
         }
 
         public IActionResult ViewInfo(string id)
@@ -55,6 +59,7 @@ namespace SoftwareUniversity_WebApp.Controllers
         [HttpPost]
         public IActionResult Edit(TrainingViewModel model)
         {
+            (bool passed1, string error1) = _validator.ValidateModel(model);
             if (ModelState.IsValid)
             {
                 if (_trainingService.EditTraining(model))
@@ -62,10 +67,10 @@ namespace SoftwareUniversity_WebApp.Controllers
                     return RedirectToAction("Home", "Home");
 
                 }
-                return RedirectToAction("Error", "Home");
+                return RedirectToAction("Error", "Home", new { error1 });
 
             }
-            return RedirectToAction("Error", "Home");
+            return RedirectToAction("Error", "Home", new { error1 });
         }
 
         public IActionResult Remove(string id)

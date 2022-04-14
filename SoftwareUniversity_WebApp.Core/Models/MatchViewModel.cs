@@ -11,8 +11,8 @@ namespace WebApp.Core.Models
         public DateTime Time { get; set; }
 
         public string Team1Id { get; set; }
-        public Team Team1 { get; set; }
+        public Team? Team1 { get; set; }
         public string Team2Id { get; set; }
-        public Team Team2 { get; set; }
+        public Team? Team2 { get; set; }
     }
 }
