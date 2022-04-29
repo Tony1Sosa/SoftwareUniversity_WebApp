@@ -8,7 +8,7 @@ namespace WebApp.Core.Interfaces
 
         public IEnumerable<PlayerViewModel> GetPlayersByTeam(string teamId);
         public IEnumerable<PlayerViewModel> GetPlayers(string UserId);
-        public IQueryable<PlayerViewModel> FindPlayer(string modelId);
+        public PlayerViewModel FindPlayer(string modelId);
 
         public bool EditPlayer(PlayerViewModel model);
         public bool RemovePlayer(string modelId);

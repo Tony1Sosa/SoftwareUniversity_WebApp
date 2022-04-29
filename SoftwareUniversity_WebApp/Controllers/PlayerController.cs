@@ -10,13 +10,15 @@ namespace SoftwareUniversity_WebApp.Controllers
     {
         private readonly IPlayerService _playerService;
         private readonly IRepository _repository;
-        private readonly  IValidationService _validator;
+        private readonly IValidationService _validator;
+        private readonly ITeamService _teamService;
 
-        public PlayerController(IPlayerService playerService, IRepository repository, IValidationService validator)
+        public PlayerController(IPlayerService playerService, IRepository repository, IValidationService validator, ITeamService teamService)
         {
             _playerService = playerService;
             _repository = repository;
             _validator = validator;
+            _teamService = teamService;
         }
 
         public IActionResult Add()
@@ -53,7 +55,7 @@ namespace SoftwareUniversity_WebApp.Controllers
         public IActionResult Edit(string id)
         {
             var player = _playerService.FindPlayer(id);
-
+            ViewData["team"] = _teamService.FindTeamForPlayer(player)
             return View(player);
         }
 

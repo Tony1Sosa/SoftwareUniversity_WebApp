@@ -67,6 +67,26 @@ namespace WebApp.Core.Services
             return team;
         }
 
+        public IQueryable<TeamViewModel> FindTeamForPlayer(string playerId)
+        {
+            var player = _repository.All<Player>().FirstOrDefault(p => p.Id == playerId);
+            IQueryable<TeamViewModel> team = default;
+
+            if (player != null)
+            {
+                 team = _repository.All<Team>()
+                     .Where(t => t.Id == player.TeamId)
+                     .Select(t => new TeamViewModel() 
+                     {
+                         Id = t.Id, 
+                         Name = t.Name, 
+                         AgeSection = t.AgeSection
+                     });
+            }
+
+            return team;
+        }
+
         public bool EditTeam(TeamViewModel model)
         {
             var team = _repository.All<Team>()
@@ -106,7 +126,10 @@ namespace WebApp.Core.Services
                 }
 
                 _repository.Remove(team);
-                _repository.Remove(match);
+                if (match!= null)
+                {
+                    _repository.Remove(match);
+                }
                 _repository.SaveChanges();
                 return true;
             }

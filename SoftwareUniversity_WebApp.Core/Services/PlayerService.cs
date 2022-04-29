@@ -60,22 +60,22 @@ namespace WebApp.Core.Services
             return players;
         }
 
-        public IQueryable<PlayerViewModel> FindPlayer(string modelId)
+        public PlayerViewModel FindPlayer(string modelId)
         {
             var player = repo.All<Player>()
-                .Where(p => p.Id == modelId)
-                .Select(p => new PlayerViewModel()
-                {
-                    Id = p.Id,
-                    Foot = p.Foot,
-                    Name = string.Concat(p.FirstName, p.LastName),
-                    BD = p.BirthDate,
-                    Number = p.Number,
-                    Possition = p.Position,
-                    
-                });
+                .First(p => p.Id == modelId);
 
-            return player;
+            var playerModel = new PlayerViewModel()
+            {
+                Id = player.Id,
+                Foot = player.Foot,
+                Name = string.Concat(player.FirstName, player.LastName),
+                BD = player.BirthDate,
+                Number = player.Number,
+                Possition = player.Position,
+            };
+
+            return playerModel;
         }
 
         public bool EditPlayer(PlayerViewModel model)

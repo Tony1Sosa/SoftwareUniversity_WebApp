@@ -9,6 +9,7 @@ namespace WebApp.Core.Interfaces
         public IEnumerable<TeamViewModel> GetTeams(string userId);
 
         public IQueryable<TeamViewModel> FindTeam(string modelId);
+        public IQueryable<TeamViewModel> FindTeamForPlayer(string playerId);
 
         public bool EditTeam(TeamViewModel model);
 
